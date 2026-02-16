@@ -1,10 +1,10 @@
 module.exports =
   ({ pool, queryReturnError }) =>
   async (req, res, next) => {
-    const userId = req.params.userId;
+    const userId = req.user.id;
 
     const result = await pool.query(
-      "SELECT name, phone, email, address FROM customers_details WHERE id = $1",
+      "SELECT name, phone, address, is_seller FROM customers_details WHERE id = $1",
       [userId],
     );
 
