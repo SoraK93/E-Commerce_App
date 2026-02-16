@@ -34,4 +34,20 @@ const registerAPI = async (formData) => {
   return data;
 };
 
-export { loginAPI, registerAPI };
+const logoutAPI = async () => {
+  const response = await fetch(`${ENDPOINT}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(
+      data.message || "Internal Error: Error Occurred during logout",
+    );
+  }
+
+  return data;
+};
+
+export { loginAPI, registerAPI, logoutAPI };
