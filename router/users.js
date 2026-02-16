@@ -4,6 +4,8 @@ const {
   getUserById,
   updateUserById,
   deleteUserById,
+  getUserEmail,
+  changeUserPassword,
 } = require("../controller/userController");
 const { checkOwnerShip, checkLoggedIn } = require("../utility/api-auth");
 
@@ -11,10 +13,14 @@ const user = express.Router();
 
 user.get("/", checkLoggedIn, getUsers);
 
-user.get("/:userId", checkOwnerShip, getUserById);
+user.get("/seller-profile", getUserById);
 
-user.patch("/:userId", checkOwnerShip, updateUserById);
+user.patch("/update", checkLoggedIn, updateUserById);
 
-user.delete("/:userId", checkOwnerShip, deleteUserById);
+user.delete("/delete", checkLoggedIn, deleteUserById);
+
+user.get("/email", checkLoggedIn, getUserEmail)
+
+user.patch("/change-password", checkLoggedIn, changeUserPassword)
 
 module.exports = user;
