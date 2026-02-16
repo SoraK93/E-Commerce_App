@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { FormInput } from "../../components";
 import { loginAPI } from "./loginRegisterAPI";
+import { handleChange } from "../../utilities/event-helper"
 
 const Login = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-
-  const handleChange = (field, value) => {
-    setLoginData((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,12 +30,12 @@ const Login = () => {
         <FormInput
           name="email"
           value={loginData.email}
-          setFunc={(val) => handleChange("email", val)}
+          setFunc={(val) => handleChange(setLoginData, "email", val)}
         />
         <FormInput
           name="password"
           value={loginData.password}
-          setFunc={(val) => handleChange("password", val)}
+          setFunc={(val) => handleChange(setLoginData, "password", val)}
         />
         <button>Login</button>
       </form>

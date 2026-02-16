@@ -15,6 +15,7 @@ const FormInput = ({ name, type = "text", value, setFunc = null }) => {
       type = "password";
       break;
     case "phone":
+      labelName = "Phone"
       // inputPattern = "^\\+?[1-9][0-9]{7,14}$";
       type = "tel";
       break;

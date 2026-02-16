@@ -14,10 +14,6 @@ const Register = () => {
     isSeller: false,
   });
 
-  const handleChange = (name, value) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     registerAPI(formData);
@@ -34,13 +30,13 @@ const Register = () => {
           <FormInput
             name={field}
             value={formData[field]}
-            setFunc={(val) => handleChange(field, val)}
+            setFunc={(val) => handleChange(setFormData, field, val)}
             key={`registrationform-${field}`}
           />
         ))}
         <ToggleButton
           value={formData.isSeller}
-          setFunc={(val) => handleChange("isSeller", val)}
+          setFunc={(val) => handleChange(setFormData, "isSeller", val)}
         />
         <button>Login</button>
       </form>
