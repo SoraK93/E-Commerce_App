@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 # idea into code - testing file
 */*-sandbox.js
+
+# extra file/ folder
+/public-api-suggestion
