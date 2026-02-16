@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   getUsers,
-  getUserById,
+  getSellerById,
   updateUserById,
   deleteUserById,
   getUserEmail,
@@ -13,7 +13,7 @@ const user = express.Router();
 
 user.get("/", checkLoggedIn, getUsers);
 
-user.get("/seller-profile", getUserById);
+user.get("/seller-profile", getSellerById);
 
 user.patch("/update", checkLoggedIn, updateUserById);
 
