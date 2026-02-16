@@ -1,14 +1,47 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { getUser, updateUser } from "./usersAPI";
+
+const initial = {
+  info: { id: null, name: null, phone: null, address: null, is_seller: false },
+  loading: "initial",
+  error: null,
+};
+
+const handlePending = (state, action) => {
+  state.loading = "pending";
+  state.info = initial.info;
+  state.error = null;
+};
+
+const handleRejected = (state, action) => {
+  state.loading = "failed";
+};
+
+const handleFulfilled = (state, action) => {
+  state.loading = "fulfilled";
+  state.info = action.payload;
+  state.error = null;
+};
 
 const user = createSlice({
   name: "users",
-  initialState: {
-    info: { id: "", name: "", phone: "", address: "", is_seller: false },
-    loading: "initial",
-    error: null,
-  },
+  initialState: initial,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      // fulfilled case
+      .addMatcher(
+        isAnyOf(getUser.fulfilled, updateUser.fulfilled),
+        handleFulfilled,
+      )
+      // pending case
+      .addMatcher(isAnyOf(getUser.pending, updateUser.pending), handlePending)
+      // rejected case
+      .addMatcher(
+        isAnyOf(getUser.rejected, updateUser.rejected),
+        handleRejected,
+      );
+  },
 });
 
 export const selectUser = {
