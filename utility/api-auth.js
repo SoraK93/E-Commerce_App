@@ -85,7 +85,7 @@ const checkLoggedIn = (req, res, next) => {
 };
 
 const checkOwnerShip = (req, res, next) => {
-  const userId = req.params.userId;
+  const userId = req.body.id;
   const currentUser = req.user;
 
   if (currentUser.id === userId) {
@@ -97,6 +97,24 @@ const checkOwnerShip = (req, res, next) => {
     .json({ error: "Forbidden: You do not have permission" });
 };
 
+const authenticateLogin = (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return res.status(500).json({ message: "Internal Server Error" });
+
+    if (!user) {
+      return res.status(401).json({
+        message: info?.message || "Incorrect email or password provided",
+      });
+    }
+
+    req.login(user, (err) => {
+      if (err) return res.status(500).json({ message: "Login Error" });
+
+      return next();
+    });
+  })(req, res, next);
+};
+
 module.exports = {
   localStrategy,
   serialize,
@@ -104,4 +122,5 @@ module.exports = {
   checkRole,
   checkLoggedIn,
   checkOwnerShip,
+  authenticateLogin
 };

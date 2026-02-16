@@ -6,10 +6,10 @@ const {
   authRegister,
   authLogout,
 } = require("../controller/authController");
-
+const { authenticateLogin } = require("../utility/api-auth")
 const auth = express.Router();
 
-auth.post("/login", passport.authenticate("local"), authLogin);
+auth.post("/login", authenticateLogin, authLogin);
 
 auth.post("/register", authRegister);
 
