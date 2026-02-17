@@ -8,7 +8,6 @@ const dependencies = { bcrypt, pool, queryReturnError, genPatchRouteQueryList };
 
 module.exports = {
   getUsers: require("./_getUsers")(dependencies),
-  getSellerById: require("./_getSellerById")(dependencies),
   updateUserById: require("./_updateUserById")(dependencies),
   deleteUserById: require("./_deleteUserById")(dependencies),
   getUserEmail: require("./_getUserEmail")(dependencies),
