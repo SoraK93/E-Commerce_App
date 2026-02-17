@@ -14,13 +14,17 @@ const User = () => {
             Profile
             <ul>
               <li>
-                <Link to="#">View profile</Link>
+                <Link to="/user">View profile</Link>
               </li>
               <li>
-                <Link to={`/user/update`} state={{ mode: "profile" }}>Update profile</Link>
+                <Link to="/user/update" state={{ mode: "profile" }}>
+                  Update profile
+                </Link>
               </li>
               <li>
-                <Link to={`/user/update`} state={{ mode: "password" }}>Change password</Link>
+                <Link to="/user/update" state={{ mode: "password" }}>
+                  Change password
+                </Link>
               </li>
             </ul>
           </li>
@@ -29,13 +33,10 @@ const User = () => {
               Products
               <ul>
                 <li>
-                  <Link>Add new product</Link>
+                  <Link to="/user/product/view">View my products</Link>
                 </li>
                 <li>
-                  <Link>Edit product details</Link>
-                </li>
-                <li>
-                  <Link>Delete product</Link>
+                  <Link to="/user/product/add">Add new product</Link>
                 </li>
               </ul>
             </li>
