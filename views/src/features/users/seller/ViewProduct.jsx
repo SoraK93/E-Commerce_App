@@ -1,0 +1,43 @@
+import { useSelector } from "react-redux";
+import { selectProduct } from "../../Products/productsSlice";
+import { useNavigate } from "react-router";
+
+const ViewProduct = () => {
+  const navigate = useNavigate();
+  let productList = useSelector(selectProduct.list);
+
+  const onProductClick = (e, id) => {
+    e.stopPropagation();
+    navigate(`/product/${id}`);
+  };
+
+  const onButtonClick = (e, product, text) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(`/user/product/${text}`, { state: { product } });
+  };
+
+  return (
+    <ul>
+      {productList?.map((product) => (
+        <li key={product.id}>
+          <div onClick={(e) => onProductClick(e, product.id)}>
+            <p>{product.product_name}</p>
+            <p>{product.description}</p>
+            <p>{product.in_stock}</p>
+            <p>{product.price}</p>
+            <p>{product.seller_name}</p>
+            <button onClick={(e) => onButtonClick(e, product, "edit")}>
+              Edit
+            </button>
+            <button onClick={(e) => onButtonClick(e, product, "delete")}>
+              Delete
+            </button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export { ViewProduct };
