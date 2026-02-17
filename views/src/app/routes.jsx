@@ -13,6 +13,7 @@ const { logoutAPI } = auth.api;
 // users
 const { getUser } = users.api;
 const { User, ViewProfile, UpdateUserInfo } = users.component;
+import { AddProduct, ViewProduct, getProductBySeller } from "../features/users";
 
 const handleDispatch = async ({ api, data }) => {
   await store.dispatch(api(data)).unwrap();
@@ -65,6 +66,29 @@ export const AppRoutes = createBrowserRouter([
           {
             path: "update",
             element: <UpdateUserInfo />,
+          },
+          {
+            path: "product",
+            children: [
+              {
+                path: "view",
+                element: <ViewProduct />,
+                loader: async () =>
+                  await handleDispatch({ api: getProductBySeller }),
+              },
+              {
+                path: "add",
+                element: <AddProduct />,
+              },
+              {
+                path: "edit",
+                element: <AddProduct />,
+              },
+              {
+                path: "delete",
+                element: <ViewProduct />,
+              },
+            ],
           },
         ],
       },
