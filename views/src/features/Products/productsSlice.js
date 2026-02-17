@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { getAllProduct, getProductById } from "./productsAPI";
+import { getProductBySeller } from "../users/seller/sellerAPI";
 
 const handlePending = (state, action) => {
   state.loading = "pending";
@@ -12,6 +13,11 @@ const handleRejected = (state, action) => {
   state.error = action;
 };
 
+const handleFulfilled = (state, action) => {
+  state.loading = "fulfilled";
+  state.productList = action.payload;
+};
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
@@ -22,26 +28,31 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // get list of all products
-      .addCase(getAllProduct.fulfilled, (state, action) => {
-        state.loading = "fulfilled";
-        state.productList = action.payload;
-      })
-
-      // get a single product details
-      .addCase(getProductById.fulfilled, (state, action) => {
-        state.loading = "fulfilled";
-        state.productList = action.payload;
-      })
-
-      // handle all common pending cases
+      // pending cases
       .addMatcher(
-        isAnyOf(getAllProduct.pending, getProductById.pending),
+        isAnyOf(
+          getAllProduct.pending,
+          getProductById.pending,
+          getProductBySeller.pending,
+        ),
         handlePending,
       )
-      // handle all common rejected cases
+      // fulfilled cases
       .addMatcher(
-        isAnyOf(getAllProduct.rejected, getProductById.rejected),
+        isAnyOf(
+          getAllProduct.fulfilled,
+          getProductById.fulfilled,
+          getProductBySeller.fulfilled,
+        ),
+        handleFulfilled,
+      )
+      // rejected cases
+      .addMatcher(
+        isAnyOf(
+          getAllProduct.rejected,
+          getProductById.rejected,
+          getProductBySeller.rejected,
+        ),
         handleRejected,
       );
   },
