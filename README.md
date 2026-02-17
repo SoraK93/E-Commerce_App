@@ -30,3 +30,10 @@ $ npm run dev
 - Setup user based database schema giving access to specific tables on user level (isolating each users access to database)
 - Create SSL/ TLS certificate for all our connections ( backend <---> database )
 - Structure backend file in a organized manner
+
+## TODO List (Frontend)
+- Implement forget password
+- Add product manage section in user profile (seller exclusive)
+- user can visit seller profile (no permissions needed)
+- cart crud operation
+- order crud operation
