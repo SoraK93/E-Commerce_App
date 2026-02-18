@@ -12,5 +12,5 @@ module.exports =
       return next(queryReturnError("Product not found", 404));
     }
 
-    res.status(200).send(result);
+    res.sendStatus(204);
   };
