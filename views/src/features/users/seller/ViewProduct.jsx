@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectProduct } from "../../Products/productsSlice";
 import { useNavigate } from "react-router";
+import { deleteProductBySeller } from "./sellerAPI";
 
 const ViewProduct = () => {
   const navigate = useNavigate();
@@ -14,7 +15,18 @@ const ViewProduct = () => {
   const onButtonClick = (e, product, text) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`/user/product/${text}`, { state: { product } });
+    if (text === "edit") {
+      navigate(`/user/product/${text}`, { state: { product } });
+      return;
+    } else if (text === "delete") {
+      (async () => {
+        try{
+          await deleteProductBySeller({ productId: product.id });
+        } catch (err) {
+          console.error(err)
+        }
+      })();
+    }
   };
 
   return (
