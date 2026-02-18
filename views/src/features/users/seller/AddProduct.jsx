@@ -28,13 +28,15 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = isEdit
-        ? await editProductBySeller({})
-        : await addProductBySeller(formData);
+      if (isEdit) {
+        await editProductBySeller({ productId: product.id, formData });
+        navigate("/user/product/view");
+        return;
+      }
+      const data = await addProductBySeller(formData);
       setNewProduct(data);
     } catch (err) {
-      console.error("Error adding product:", err);
-      alert(`Failed to add product: ${err.message}`);
+      console.error("Product add/ modify failed.", err);
     }
   };
 
@@ -61,7 +63,7 @@ const AddProduct = () => {
       )}
       <div>
         {heading}
-        <form method="post" onSubmit={handleSubmit}>
+        <form method={isEdit ? "patch" : "post"} onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name">Name:</label>
             <br />
