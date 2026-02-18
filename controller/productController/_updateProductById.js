@@ -10,5 +10,8 @@ module.exports =
       [...updateValues, productId],
     );
 
-    res.status(204).json({ message: "update successful" });
+    if (!result.rowCount)
+      return res.status(400).json({ message: "Product update failed" });
+
+    res.sendStatus(204);
   };
