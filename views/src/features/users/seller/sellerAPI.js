@@ -34,8 +34,40 @@ const addProductBySeller = async (formData) => {
   return data;
 };
 
-const editProductBySeller = async () => {
-  const response = await fetch(`${ENDPOINT}/`);
+const editProductBySeller = async ({ productId, formData }) => {
+  const response = await fetch(`${ENDPOINT}/product/${productId}`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Bad request");
+
+  if (response.status === 204) return { message: "Update successful" };
+
+  return data;
 };
 
-export { getProductBySeller, addProductBySeller, editProductBySeller };
+const deleteProductBySeller = async ({ productId }) => {
+  const response = await fetch(`${ENDPOINT}/product/${productId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  if (!response.ok) throw new Error(data.message || "Bad request");
+
+  if (response.status === 204) return { message: "Delete successful" };
+
+  return data;
+};
+
+export {
+  getProductBySeller,
+  addProductBySeller,
+  editProductBySeller,
+  deleteProductBySeller,
+};
