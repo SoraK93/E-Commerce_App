@@ -6,7 +6,7 @@ const {
   updateProductById,
   deleteProductById,
 } = require("../controller/productController");
-const { checkRole } = require("../utility/api-auth");
+const { checkRole, checkLoggedIn } = require("../utility/api-auth");
 
 const product = express.Router();
 
@@ -17,11 +17,11 @@ product.get("/", getProducts);
 product.get("/:productId", getProductById);
 
 // creates a new product
-product.post("/", checkRole, createNewProduct);
+product.post("/", checkLoggedIn, checkRole, createNewProduct);
 
 // request update for a specific product in database
-product.patch("/:productId", checkRole, updateProductById);
+product.patch("/:productId", checkLoggedIn, checkRole, updateProductById);
 
-product.delete("/:productId", checkRole, deleteProductById);
+product.delete("/:productId", checkLoggedIn, checkRole, deleteProductById);
 
 module.exports = product;
