@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { FormInput } from "../../components";
 import { loginAPI } from "./loginRegisterAPI";
-import { handleChange } from "../../utilities/event-helper"
+import { handleChange } from "../../../utilities/event-helper";
 
 const Login = () => {
   const navigate = useNavigate();

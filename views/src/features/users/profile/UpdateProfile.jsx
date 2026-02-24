@@ -1,5 +1,5 @@
 import { FormInput, ToggleButton } from "../../components";
-import { handleChange } from "../../utilities/event-helper";
+import { handleChange } from "../../../utilities/event-helper";
 
 const UpdateProfile = ({ handleSubmit, setFormData, formData }) => {
   return (

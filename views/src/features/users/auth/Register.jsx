@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import { FormInput, ToggleButton } from "../../components";
 import { useState } from "react";
 import { registerAPI } from "./loginRegisterAPI";
-import { handleChange } from "../../utilities/event-helper"
+import { handleChange } from "../../../utilities/event-helper";
 
 const Register = () => {
   const navigate = useNavigate();

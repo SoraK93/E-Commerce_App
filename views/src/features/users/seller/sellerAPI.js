@@ -58,9 +58,10 @@ const deleteProductBySeller = async ({ productId }) => {
     credentials: "include",
   });
 
-  if (!response.ok) throw new Error(data.message || "Bad request");
-
   if (response.status === 204) return { message: "Delete successful" };
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Bad request");
 
   return data;
 };

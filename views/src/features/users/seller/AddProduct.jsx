@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { handleChange } from "../../utilities/event-helper";
+import { handleChange } from "../../../utilities/event-helper";
 import { Link, useLocation, useNavigate } from "react-router";
 import { addProductBySeller, editProductBySeller } from "./sellerAPI";
 
