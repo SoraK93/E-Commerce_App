@@ -8,7 +8,7 @@ const AllProducts = () => {
 
   const handleOnClick = (e, id) => {
     e.stopPropagation();
-    navigate(`/product/${id}`)
+    navigate(`/product/${id}`);
   };
 
   return (
@@ -18,7 +18,11 @@ const AllProducts = () => {
           <div onClick={(e) => handleOnClick(e, product.id)}>
             <p>{product.product_name}</p>
             <p>{product.description}</p>
-            <p>{product.in_stock}</p>
+            <p>
+              {product.in_stock > 10
+                ? "In stock"
+                : product.in_stock || "Out of Stock"}
+            </p>
             <p>{product.price}</p>
             <p>{product.seller_name}</p>
           </div>

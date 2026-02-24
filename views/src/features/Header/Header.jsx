@@ -1,9 +1,12 @@
 import { Link, useSubmit } from "react-router";
 import { useSelector } from "react-redux";
 import { selectUser } from "../users/usersSlice";
+import { selectCartList } from "../cart/api/cartSlice";
+import { useEffect } from "react";
 
 const Header = () => {
   const userInfo = useSelector(selectUser.info);
+  const cartList = useSelector(selectCartList);
   const submit = useSubmit();
 
   const handleClick = () => {
@@ -20,7 +23,11 @@ const Header = () => {
           <li>
             <input type="text" placeholder="Search Bar" />
           </li>
-          <li>cart icon</li>
+          <li>
+            <Link to="/cart">
+              Cart<span>({cartList?.length})</span>
+            </Link>
+          </li>
           {userInfo.name ? (
             <>
               <li>
