@@ -1,8 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router";
 
-import App from "./App";
 import { products, ErrorPage, auth, users } from "../features";
-import { store } from "./store";
+import { handleStoreDispatch, fallback } from "../utilities/route-helper";
 
 // products
 const { AllProducts, ProductById } = products.component;
@@ -15,22 +14,10 @@ const { getUser } = users.api;
 const { User, ViewProfile, UpdateUserInfo } = users.component;
 import { AddProduct, ViewProduct, getProductBySeller } from "../features/users";
 
-const handleDispatch = async ({ api, data }) => {
-  await store.dispatch(api(data)).unwrap();
-  return null;
-};
-
-const fallback = () => {
-  return <div>Loading data ...</div>;
-};
-
 export const AppRoutes = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    loader: async () => {
-      await handleDispatch({ api: getUser });
-    },
+    lazy: () => import("./App"),
     HydrateFallback: () => <div>...</div>,
     errorElement: <ErrorPage />,
     children: [
@@ -38,7 +25,7 @@ export const AppRoutes = createBrowserRouter([
       {
         index: true,
         element: <AllProducts />,
-        loader: async () => await handleDispatch({ api: getAllProduct }),
+        loader: async () => await handleStoreDispatch({ api: getAllProduct }),
         HydrateFallback: fallback,
       },
       // Product Page
@@ -49,7 +36,7 @@ export const AppRoutes = createBrowserRouter([
             path: ":productId",
             element: <ProductById />,
             loader: async ({ params }) =>
-              await handleDispatch({ api: getProductById, data: params }),
+              await handleStoreDispatch({ api: getProductById, data: params }),
             HydrateFallback: fallback,
           },
         ],
@@ -61,7 +48,7 @@ export const AppRoutes = createBrowserRouter([
           {
             index: true,
             element: <ViewProfile />,
-            loader: async () => await handleDispatch({ api: getUser }),
+            loader: async () => await handleStoreDispatch({ api: getUser }),
           },
           {
             path: "update",
@@ -74,7 +61,7 @@ export const AppRoutes = createBrowserRouter([
                 path: "view",
                 element: <ViewProduct />,
                 loader: async () =>
-                  await handleDispatch({ api: getProductBySeller }),
+                  await handleStoreDispatch({ api: getProductBySeller }),
               },
               {
                 path: "add",
@@ -91,6 +78,23 @@ export const AppRoutes = createBrowserRouter([
             ],
           },
         ],
+      },
+    ],
+  },
+  {
+    path: "cart",
+    lazy: () => import("../features/cart/pages/Cart"),
+    HydrateFallback: fallback,
+  },
+  {
+    path: "order",
+    lazy: () => import("../features/order/Order"),
+    HydrateFallback: () => fallback("Order"),
+    children: [
+      {
+        index: true,
+        lazy: () => import("../features/order/components/PlaceOrder"),
+        HydrateFallback: () => fallback("Order"),
       },
     ],
   },
