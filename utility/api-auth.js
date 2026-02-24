@@ -64,25 +64,21 @@ const deserialize = (id, done) => {
 };
 
 const checkRole = (req, res, next) => {
-  if (!req.isAuthenticated || !req.isAuthenticated()) {
-    return res.status(401).json({ error: "Unauthorized: Please login" });
-  }
-
   if (req.user.is_seller) {
     return next();
   }
 
   return res
     .status(403)
-    .json({ error: "Forbidden: You do not have permission" });
+    .json({ message: "Forbidden: You do not have permission" });
 };
 
 const checkLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
-
-  return res.status(401).json({ error: "Unauthorized: Please login" });
+  
+  return res.status(401).json({ message: "Unauthorized: Please login" });
 };
 
 const checkOwnerShip = (req, res, next) => {
@@ -95,7 +91,7 @@ const checkOwnerShip = (req, res, next) => {
 
   return res
     .status(403)
-    .json({ error: "Forbidden: You do not have permission" });
+    .json({ message: "Forbidden: You do not have permission" });
 };
 
 const authenticateLogin = (req, res, next) => {
