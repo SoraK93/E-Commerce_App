@@ -142,4 +142,4 @@ vite.config.ts.timestamp-*
 */*-sandbox.js
 
 # extra file/ folder
-/public-api-suggestion
+/suggestion
