@@ -1,19 +1,17 @@
 const express = require("express");
 const {
   getAllCart,
-  deleteCartItem,
   createNewCart,
   updateCart,
 } = require("../controller/cartController/index");
+const { checkLoggedIn } = require("../utility/api-auth")
 
 const cart = express.Router();
 
-cart.get("/:customerId", getAllCart);
+cart.get("/", checkLoggedIn, getAllCart);
 
-// cart.post("/:customerId", createNewCart);
+cart.post("/", checkLoggedIn, createNewCart);
 
-// cart.patch("/:customerId", updateCart);
-
-cart.delete("/:customerId", deleteCartItem);
+cart.patch("/", checkLoggedIn, updateCart);
 
 module.exports = cart;
