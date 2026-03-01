@@ -1,14 +1,19 @@
-module.exports =
-  ({ pool, createOrderQuery, queryReturnError }) =>
-  async (req, res, next) => {
-    const customerId = req.params.customerId;
+const pool = require("../../model/database");
 
-    const orderQuery = createOrderQuery("get");
-    const result = await pool.query(orderQuery, [customerId]);
+module.exports = async (req, res) => {
+  const customerId = req.user.id;
 
-    if (result.rowCount === 0) {
-      return next(queryReturnError("No order found."), 404);
-    }
+  const query = `SELECT order_details.id, products.name, 
+    (quantity * products.price) AS amount,
+    quantity, payment_status, payment_mode 
+    FROM order_details 
+    INNER JOIN products ON products.id = order_details.product_id 
+    WHERE order_details.customer_id = $1`;
+  const result = await pool.query(query, [customerId]);
 
-    res.json(result.rows);
-  };
+  if (result.rowCount === 0) {
+    return res.status(404).json({ message: "No order found." });
+  }
+
+  res.json(result.rows);
+};

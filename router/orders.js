@@ -6,17 +6,18 @@ const {
   updateCustomerOrderById,
   deleteCustomerOrderById,
 } = require("../controller/orderController");
+const { checkLoggedIn } = require("../utility/api-auth");
 
 const order = express.Router();
 
-order.get("/:customerId", getCustomerOrder);
+order.get("/", checkLoggedIn, getCustomerOrder);
 
-order.get("/:customerId/:orderId", getCustomerOrderById);
+order.get("/:orderId", checkLoggedIn, getCustomerOrderById);
 
-order.post("/:customerId", createCustomerOrder);
+order.post("/", checkLoggedIn, createCustomerOrder);
 
-order.patch("/:customerId/:orderId", updateCustomerOrderById);
+order.patch("/:orderId", checkLoggedIn, updateCustomerOrderById);
 
-order.delete("/:customerId/:orderId", deleteCustomerOrderById);
+order.delete("/:orderId", checkLoggedIn, deleteCustomerOrderById);
 
 module.exports = order;

@@ -12,7 +12,7 @@ const dependencies = {
 };
 
 module.exports = {
-  getCustomerOrder: require("./_getCustomerOrder")(dependencies),
+  getCustomerOrder: require("./_getCustomerOrder"),
   getCustomerOrderById: require("./_getCustomerOrderById")(dependencies),
   createCustomerOrder: require("./_createCustomerOrder")(dependencies),
   updateCustomerOrderById: require("./_updateCustomerOrderById")(dependencies),
