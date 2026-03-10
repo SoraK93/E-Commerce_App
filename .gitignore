@@ -143,3 +143,6 @@ vite.config.ts.timestamp-*
 
 # extra file/ folder
 /suggestion
+*/.venv
+/.idea
+*/.idea
