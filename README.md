@@ -1,6 +1,9 @@
 # Project: E-Commerce App
 This project is my first full stack application. This will contain all the basic features found in any e-commerce website.
-> Payment section will be skipped ( This may change laten on )
+> Payment section will be skipped ( This may change later on )
+
+# Major Change (On-going)
+Migrating to python backend using FastAPI Framework.
 
 ## Getting started
 Run command in terminal to:  
