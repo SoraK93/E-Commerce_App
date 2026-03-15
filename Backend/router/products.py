@@ -1,7 +1,11 @@
 from fastapi import APIRouter
 
-product = APIRouter(
-  prefix="/product"
+products = APIRouter(
+  prefix="/products",
+  tags=["products"]
 )
 
-product.get("/")
+
+@products.get("/")
+async def prod():
+    return {"message": "product works"}

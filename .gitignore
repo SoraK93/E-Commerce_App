@@ -143,7 +143,6 @@ vite.config.ts.timestamp-*
 
 # extra file/ folder
 /suggestion
-*/.venv
-/.idea
-*/.idea
-*/__pycache__
+**/.venv
+**/.idea
+**/__pycache__
