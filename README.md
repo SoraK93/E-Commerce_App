@@ -48,11 +48,11 @@ $ npm run dev
 
 ### Backend
 
-- ~~Setup each routes with its appropriate requests and responses~~
-- ~~Setup error handling in case of bad request or server issue~~
+- Setup each routes with its appropriate requests and responses
+- Setup error handling in case of bad request or server issue
 - Setup a proper structure that identifies error code for backend to database data flow
-- ~~Setup hashing for user login~~
-- ~~Setup authentication and authorisation~~
+- Setup hashing for user login
+- Setup authentication and authorisation
 - ~~Setup session & cookie~~
 - Structure backend file in a organized manner
 - making sure all api follows a certain return structure
@@ -62,7 +62,7 @@ $ npm run dev
 - Implement forget password
 - ~~Add product manage section in user profile (seller exclusive)~~
 - user can visit seller profile (no permissions needed)
-- cart crud operation
+- ~~cart crud operation~~
 - order crud operation
 
 ### Things I might look into

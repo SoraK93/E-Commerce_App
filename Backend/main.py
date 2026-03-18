@@ -8,6 +8,7 @@ import uvicorn
 
 from Backend.router.products import router as products
 from Backend.router.auth import router as auth
+from Backend.router.user import router as user
 
 load_dotenv()
 
@@ -17,12 +18,13 @@ app = FastAPI(
     version="0.0.1"
 )
 
-origins = ["http://localhost:5173"]
+origins = ["https://localhost:5173"]
 
 app.add_middleware(SessionMiddleware,
                    secret_key=os.environ["S_SECRET"],
                    max_age=60*60*24,
-                   same_site="lax")
+                   same_site="lax",
+                   https_only=True)
 
 app.add_middleware(CORSMiddleware,
                    allow_origins=origins,
@@ -32,6 +34,7 @@ app.add_middleware(CORSMiddleware,
 
 app.include_router(products)
 app.include_router(auth)
+app.include_router(user)
 
 
 @app.get("/")
