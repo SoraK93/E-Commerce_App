@@ -1,9 +1,13 @@
 # Project: E-Commerce App
 
-This project is my first full stack application. This will contain all the basic features found in any e-commerce website.
+This project is a full stack application. This will contain all the basic features found in any e-commerce website.  
+After which, I will start the optimization process for each specific process.
 
 > [!NOTE]  
-> **Main Purpose:** Implement newly learned feature or code into this project.
+> **Main Purpose:**
+>
+> - Create a E-Commerce specific framework, able to handle all basic and optional functionality found in any E-Commerce App.
+> - Implement newly learned feature or code into this project.
 
 > [!IMPORTANT]  
 > **Major Change:** Migrating to python backend using FastAPI Framework.  
@@ -15,16 +19,25 @@ Run command in terminal to:
 install all packages
 
 ```shell
+$ pip install -r requirement.txt
+```
+
+To run backend server at (run this first): https://127.0.0.1:43576/
+
+```shell
+$ python -m Backend.main
+```
+
+### Front-End:
+
+Run command in terminal to:  
+install all packages
+
+```shell
 $ npm install
 ```
 
-To run backend server at (run this first): http://localHost:43576/
-
-```shell
-$ npm run start
-```
-
-To run front end server: http://localhost:5173/
+Start front end server at https://localhost:5173/
 
 ```shell
 $ cd views
