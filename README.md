@@ -6,7 +6,7 @@ This project is my first full stack application. This will contain all the basic
 > **Main Purpose:** Implement newly learned feature or code into this project.
 
 > [!IMPORTANT]  
-> **Major Change:** Migrating to python backend using FastAPI Framework.
+> **Major Change:** Migrating to python backend using FastAPI Framework.  
 > **Status:** On-Going
 
 ## Getting started

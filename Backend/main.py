@@ -7,6 +7,7 @@ import uvicorn
 
 
 from Backend.router.products import router as products
+from Backend.router.auth import router as auth
 
 load_dotenv()
 
@@ -30,6 +31,7 @@ app.add_middleware(CORSMiddleware,
                    allow_headers=["*"])
 
 app.include_router(products)
+app.include_router(auth)
 
 
 @app.get("/")
