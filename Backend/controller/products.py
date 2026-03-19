@@ -1,5 +1,13 @@
+from Backend.model.database import engine
+from Backend.model.products_model import Products
+
+from sqlmodel import Session, select
+
 def fetch_all_product():
-    return {"message": "product works"}
+    with Session(engine) as session:
+        result = session.exec(select(Products)).all()
+
+    return result
 
 
 def fetch_product_by_id():
