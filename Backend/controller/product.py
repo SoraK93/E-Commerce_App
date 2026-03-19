@@ -1,11 +1,11 @@
 from Backend.model.database import engine
-from Backend.model.product_model import Products
+from Backend.model.product_model import ProductsModel
 
 from sqlmodel import Session, select
 
 def fetch_all_product():
     with Session(engine) as session:
-        result = session.exec(select(Products)).all()
+        result = session.exec(select(ProductsModel)).all()
 
     return result
 
