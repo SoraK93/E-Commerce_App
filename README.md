@@ -56,6 +56,7 @@ $ npm run dev
 - ~~Setup session & cookie~~
 - Structure backend file in a organized manner
 - making sure all api follows a certain return structure
+- ~~Implement alembic to manage database changes made into python models~~
 
 ### Frontend
 
