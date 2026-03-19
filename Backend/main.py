@@ -1,7 +1,5 @@
-import os, sys, uvicorn
-
-# prevent creating compiled __pycache__ bytecode folder instead store them centrally in .cache folder
-sys.pycache_prefix = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".cache")
+import os
+import uvicorn
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
