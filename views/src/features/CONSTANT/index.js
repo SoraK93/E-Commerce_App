@@ -1,1 +1,1 @@
-export const ENDPOINT = "http://localhost:43576";
+export const ENDPOINT = "https://localhost:43576";

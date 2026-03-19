@@ -1,12 +1,14 @@
+import os, sys, uvicorn
+
+# prevent creating compiled __pycache__ bytecode folder instead store them centrally in .cache folder
+sys.pycache_prefix = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".cache")
+
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import os
 from starlette.middleware.sessions import SessionMiddleware
-import uvicorn
 
-
-from Backend.router.products import router as products
+from Backend.router.product import router as products
 from Backend.router.auth import router as auth
 from Backend.router.user import router as user
 
