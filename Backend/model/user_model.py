@@ -1,10 +1,10 @@
 import uuid
-from sqlmodel import SQLModel, Field, TEXT
+from sqlmodel import SQLModel, Field, TEXT, Relationship
 from pydantic import EmailStr
 
 
-class CustomerModel(SQLModel, table=True):
-    __tablename__ = "customers_details"  # type: ignore
+class UserModel(SQLModel, table=True):
+    __tablename__ = "customers_details"
 
     id: uuid.UUID = Field(default_factory=uuid.uuid4,
                           nullable=False, primary_key=True, index=True, unique=True)
@@ -21,3 +21,6 @@ class CustomerModel(SQLModel, table=True):
     password: str = Field(nullable=False)
 
     is_seller: bool = Field(default=False, nullable=False)
+    
+    # will help in making products related query without writing any extra query
+    products: list["ProductsModel"] = Relationship(back_populates="seller")

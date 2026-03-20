@@ -1,12 +1,14 @@
 import uuid
 from datetime import datetime
 from decimal import Decimal
-from sqlmodel import SQLModel, Field
+from typing import Optional
+
 from sqlalchemy import Column, DateTime, func
+from sqlmodel import SQLModel, Field, Relationship
 
 
 class ProductsModel(SQLModel, table=True):
-    __tablename__ = "products"  # type: ignore
+    __tablename__ = "products"
 
     id: uuid.UUID = Field(default_factory=uuid.uuid4,
                           primary_key=True, index=True, nullable=False, unique=True)
@@ -23,5 +25,8 @@ class ProductsModel(SQLModel, table=True):
     created_at: datetime = Field(sa_column=Column(
         DateTime(timezone=True), server_default=func.now(), nullable=True))
 
-    seller_id: uuid.UUID = Field(
-        foreign_key="customers_details.id", nullable=False)
+    seller_id: Optional[uuid.UUID] = Field(
+        foreign_key="customers_details.id", ondelete="SET NULL", nullable=True)
+
+    # will help in making seller related query without writing any extra query
+    seller: Optional["UserModel"] = Relationship(back_populates="products")
