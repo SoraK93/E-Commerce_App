@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-import Backend.controller.user as user
-import Backend.controller.seller as seller
+import controller.user as user
+import controller.seller as seller
 
 router = APIRouter(
     prefix="/user",

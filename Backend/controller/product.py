@@ -1,5 +1,5 @@
-from Backend.model.database import engine
-from Backend.model.product_model import ProductsModel
+from model.database import engine
+from model.product_model import ProductsModel
 
 from sqlmodel import Session, select
 

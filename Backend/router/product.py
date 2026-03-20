@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-import Backend.controller.product as product
+import controller.product as product
 
 router = APIRouter(
     prefix="/product",

@@ -6,9 +6,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
-from Backend.router.product import router as products
-from Backend.router.auth import router as auth
-from Backend.router.user import router as user
+from router.product import router as products
+from router.auth import router as auth
+from router.user import router as user
 
 load_dotenv()
 
@@ -44,7 +44,7 @@ async def root():
 
 if __name__ == "__main__":
     uvicorn.run(
-        "Backend.main:app",
+        "main:app",
         host="0.0.0.0",
         port=int(os.environ["SERVER_PORT"]),
         reload=True,
