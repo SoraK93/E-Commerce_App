@@ -1,4 +1,8 @@
-def initiate_login():
+from model.database import SessionDep
+
+
+def initiate_login(email: str, password: str, session: SessionDep):
+    print(email, password)
     return {"message": "Login process starts"}
 
 

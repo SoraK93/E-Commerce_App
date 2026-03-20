@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+from model.database import SessionDep
+from model.auth_model import LoginModel
 
 import controller.auth as auth
 
@@ -9,8 +11,8 @@ router = APIRouter(
 
 
 @router.post("/login")
-async def auth_login():
-    return auth.initiate_login()
+async def auth_login(data: LoginModel, session: SessionDep):
+    return auth.initiate_login(data.email, data.password, session)
 
 
 @router.post("/register")
