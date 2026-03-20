@@ -26,7 +26,7 @@ To run backend server at (run this first): https://127.0.0.1:43576/
 
 ```shell
 $ cd Backend
-$ uvicorn main:app --reload
+$ python main.py
 ```
 
 ### Front-End:
