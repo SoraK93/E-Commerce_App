@@ -25,7 +25,8 @@ $ pip install -r requirement.txt
 To run backend server at (run this first): https://127.0.0.1:43576/
 
 ```shell
-$ python -m Backend.main
+$ cd Backend
+$ uvicorn main:app --reload
 ```
 
 ### Front-End:
@@ -56,7 +57,7 @@ $ npm run dev
 - ~~Setup session & cookie~~
 - Structure backend file in a organized manner
 - making sure all api follows a certain return structure
-- ~~Implement alembic to manage database changes made into python models~~
+- ~~Implement alembic to migrate and manage database changes made into python models~~
 
 ### Frontend
 
