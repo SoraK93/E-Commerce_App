@@ -9,12 +9,12 @@ The current state of the project can get confusing. So, I would like to clear up
 > [!NOTE]  
 > **Main Purpose:**
 >
-> - Create a E-Commerce specific framework, able to handle all basic and optional functionality found in any E-Commerce App.
+> - Create a E-Commerce specific backend, able to handle all basic and optional functionality found in any E-Commerce App.
 > - Implement newly learned feature or code into this project.
 
 > [!IMPORTANT]  
 > **Major Change:** Migrating to python backend using FastAPI Framework.  
-> **Status:** On-Going
+> **Status:** Currently implementing server-side session management, serialization, deserialization and user login/ logout
 
 ## Getting started
 
