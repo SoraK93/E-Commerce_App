@@ -1,7 +1,10 @@
 # Project: E-Commerce App
 
-This project is a full stack application. This will contain all the basic features found in any e-commerce website.  
-After which, I will start the optimization process for each specific process.
+This is a full stack application.
+
+This will contain all the basic features found in any e-commerce website. After which, I will start the optimization process for each specific process.
+
+The current state of the project can get confusing. So, I would like to clear up few things. **'Backend'** folder contains code related to **python migration**; **'views'** folder contain code related to **frontend** and **other** folders contain code of the **old Express/NodeJs backend**.
 
 > [!NOTE]  
 > **Main Purpose:**
@@ -15,26 +18,45 @@ After which, I will start the optimization process for each specific process.
 
 ## Getting started
 
+### Python Backend
 Run command in terminal to:  
 install all packages
 
 ```shell
+$ cd Backend
+$ python -m venv .venv
 $ pip install -r requirement.txt
 ```
 
-To run backend server at (run this first): https://127.0.0.1:43576/
+To run backend server at (run this first): https://127.0.0.1:43576/ 
 
 ```shell
 $ cd Backend
 $ python main.py
 ```
+### ExpressJs Backend
+Run command in terminal to:  
+install all packages
+
+```shell
+$ npm install
+```
+
+Start back end server at http://localhost:43576/
+
+```shell
+$ npm run dev
+```
 
 ### Front-End:
+> If using ExpressJS Backend, change  
+views -> features -> CONSTANT -> index.js -> ENDPOINT = `http://localhost:43576`
 
 Run command in terminal to:  
 install all packages
 
 ```shell
+$ cd views
 $ npm install
 ```
 
