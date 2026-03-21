@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from model.database import SessionDep
-from model.auth_model import LoginModel
+from Backend.schemas.login_schema import LoginModel
 
 import controller.auth as auth
 
