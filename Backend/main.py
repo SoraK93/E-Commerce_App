@@ -1,5 +1,4 @@
-import os
-
+from config import setting
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
@@ -17,16 +16,14 @@ app = FastAPI(
     description="This is the backend of my E-Commerce App"
 )
 
-origins = ["https://localhost:5173"]
-
 app.add_middleware(SessionMiddleware,
-                   secret_key=os.environ["S_SECRET"],
+                   secret_key=setting.S_SECRET,
                    max_age=60 * 60 * 24,
                    same_site="lax",
                    https_only=True)
 
 app.add_middleware(CORSMiddleware,
-                   allow_origins=origins,
+                   allow_origins=[setting.CLIENT_URL],
                    allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"])
@@ -44,8 +41,8 @@ async def root():
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        host="0.0.0.0",
-        port=int(os.environ["SERVER_PORT"]),
+        host=setting.SERVER_HOST,
+        port=setting.SERVER_PORT,
         reload=True,
         ssl_certfile="./localhost+3.pem",
         ssl_keyfile="./localhost+3-key.pem"
