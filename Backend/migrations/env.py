@@ -11,7 +11,7 @@ from sqlalchemy import pool
 from sqlmodel import SQLModel
 from alembic import context
 
-from model import ProductsModel, UserModel
+from model import ProductsModel, UserModel, SessionModel
 
 load_dotenv()
 
