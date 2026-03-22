@@ -14,7 +14,7 @@ The current state of the project can get confusing. So, I would like to clear up
 
 > [!IMPORTANT]  
 > **Major Change:** Migrating to python backend using FastAPI Framework.  
-> **Status:** Currently implementing server-side session management, serialization, deserialization and user login/ logout
+> **Status:** Implementing 
 
 ## Getting started
 
@@ -71,33 +71,33 @@ $ npm run dev
 
 ### Backend
 
-- Setup each routes with its appropriate requests and responses
-- Setup error handling in case of bad request or server issue
-- Setup a proper structure that identifies error code for backend to database data flow
-- Setup hashing for user login
-- Setup authentication and authorisation
-- ~~Setup session & cookie~~
-- Structure backend file in a organized manner
-- making sure all api follows a certain return structure
-- ~~Implement alembic to migrate and manage database changes made into python models~~
+:hourglass: Setup each routes with its appropriate requests and responses
+:hourglass: Setup error handling in case of bad request or server issue
+:hourglass: Setup a proper structure that identifies error code for backend to database data flow
+:hourglass: Setup hashing for user login
+:hourglass: Setup authentication and authorisation
+:white_check_mark: Setup session & cookie
+:hourglass: Structure backend file in a organized manner
+:hourglass: making sure all api follows a certain return structure
+:white_check_mark: Implement alembic to migrate and manage database changes made into python models
 
 ### Frontend
 
-- Implement forget password
-- ~~Add product manage section in user profile (seller exclusive)~~
-- user can visit seller profile (no permissions needed)
-- ~~cart crud operation~~
-- order crud operation
+:hourglass: Implement forget password
+:white_check_mark: Add product manage section in user profile (seller exclusive)
+:hourglass: user can visit seller profile (no permissions needed)
+:white_check_mark: cart crud operation
+:hourglass: order crud operation
 
 ### Things I might look into
 
-- Setup common middleware for all the repetative param lookups
-- Setup client connection & transaction for all database related requests
-- Setup user based database schema  
+:hourglass: Setup common middleware for all the repetative param lookups
+:hourglass: Setup client connection & transaction for all database related requests
+:hourglass: Setup user based database schema  
   giving access to specific tables on user level  
   -> isolating each users access to database
-- Create SSL/ TLS certificate for all our connections ( backend <---> database )
-- Implement soft delete then hard delete after 30 days  
+:hourglass: Create SSL/ TLS certificate for all our connections ( backend <---> database )
+:hourglass: Implement soft delete then hard delete after 30 days  
   Like in case of product, if we try to delete the product and it exists in order table, currently this delete will create issues. implement something like is_delete tag and delete_timestamp
-- Implement versioning on certain table activities like update  
+:hourglass: Implement versioning on certain table activities like update  
   this will create a safeguard towards unintentional overide when two prople are updating same thing
