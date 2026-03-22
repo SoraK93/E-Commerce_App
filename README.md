@@ -1,10 +1,6 @@
-# Project: E-Commerce App
+# E-Commerce App
 
-This is a full stack application.
-
-This will contain all the basic features found in any e-commerce website. After which, I will start the optimization process for each specific process.
-
-The current state of the project can get confusing. So, I would like to clear up few things. **'Backend'** folder contains code related to **python migration**; **'views'** folder contain code related to **frontend** and **other** folders contain code of the **old Express/NodeJs backend**.
+This is a full stack application. It will contain all the basic features found in any e-commerce website. After which, I will start the optimization process for each specific process.
 
 > [!NOTE]  
 > **Main Purpose:**
@@ -14,7 +10,10 @@ The current state of the project can get confusing. So, I would like to clear up
 
 > [!IMPORTANT]  
 > **Major Change:** Migrating to python backend using FastAPI Framework.  
-> **Status:** Implementing 
+> **Status:** Implementing  
+
+> [!TIP]  
+> The current state of the project can get confusing. So, I would like to clear up few things. **'Backend'** folder contains code related to **python migration**; **'views'** folder contain code related to **frontend** and **other** folders contain code of the **old Express/NodeJs backend**.
 
 ## Getting started
 
@@ -71,33 +70,38 @@ $ npm run dev
 
 ### Backend
 
-:hourglass: Setup each routes with its appropriate requests and responses
-:hourglass: Setup error handling in case of bad request or server issue
-:hourglass: Setup a proper structure that identifies error code for backend to database data flow
-:hourglass: Setup hashing for user login
-:hourglass: Setup authentication and authorisation
-:white_check_mark: Setup session & cookie
-:hourglass: Structure backend file in a organized manner
-:hourglass: making sure all api follows a certain return structure
-:white_check_mark: Implement alembic to migrate and manage database changes made into python models
+:hourglass: Setup each routes with its appropriate requests and responses  
+:hourglass: Setup error handling in case of bad request or server issue  
+:hourglass: Setup a proper structure that identifies error code for backend to database data flow  
+:white_check_mark: Setup hashing for user login  
+:hourglass: Setup authentication and authorisation  
+:white_check_mark: Setup session & cookie  
+:hourglass: Structure backend file in a organized manner  
+:hourglass: making sure all api follows a certain return structure  
+:white_check_mark: Implement alembic to migrate and manage database changes made into python models  
+:white_check_mark: Use HTTPS connection, Create SSL/ TLS certificate
 
 ### Frontend
 
-:hourglass: Implement forget password
-:white_check_mark: Add product manage section in user profile (seller exclusive)
-:hourglass: user can visit seller profile (no permissions needed)
-:white_check_mark: cart crud operation
-:hourglass: order crud operation
+:hourglass: Implement forget password  
+:white_check_mark: Add product manage section in user profile (seller exclusive)  
+:hourglass: user can visit seller profile (no permissions needed)  
+:white_check_mark: cart crud operation  
+:hourglass: order crud operation  
+:white_check_mark: Use HTTPS connection, Create SSL/ TLS certificate
 
-### Things I might look into
+### Things I want to do later
 
-:hourglass: Setup common middleware for all the repetative param lookups
-:hourglass: Setup client connection & transaction for all database related requests
-:hourglass: Setup user based database schema  
-  giving access to specific tables on user level  
-  -> isolating each users access to database
-:hourglass: Create SSL/ TLS certificate for all our connections ( backend <---> database )
+:hourglass: Setup common middleware for all the repetative param lookups  
+:hourglass: Setup client connection & transaction for all database related requests  
+:hourglass: Setup user based database schema giving access to specific tables on user level  
+--> Isolating each users access to database  
 :hourglass: Implement soft delete then hard delete after 30 days  
-  Like in case of product, if we try to delete the product and it exists in order table, currently this delete will create issues. implement something like is_delete tag and delete_timestamp
+--> Like in case of product, if we try to delete the product and it exists in order table, currently this delete will create issues. implement something like is_delete tag and delete_timestamp  
 :hourglass: Implement versioning on certain table activities like update  
-  this will create a safeguard towards unintentional overide when two prople are updating same thing
+--> This will create a safeguard towards unintentional overide when two prople are updating same thing  
+:hourglass: Create excel template and system that helps seller upload loads of product at once  
+:hourglass: Create e-mail services  
+--> Forget Password
+--> Account verification
+--> Certain process like uploading a bunch of products using excel
