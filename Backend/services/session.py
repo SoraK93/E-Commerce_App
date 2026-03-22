@@ -1,10 +1,10 @@
 from model.session_model import SessionModel, user_role
-from model.database import SessionDep
+from model.database import SessionDep, engine
 from pydantic import EmailStr
-from sqlmodel import delete, func
+from sqlmodel import delete, func, Session
 
 
-def serialize(session: SessionDep, email: EmailStr, role: user_role = "customer"):
+def create_new_session(session: SessionDep, email: EmailStr, role: user_role):
     """Creates user session and stores it inside database
 
     @param session: current active database session
@@ -21,10 +21,9 @@ def serialize(session: SessionDep, email: EmailStr, role: user_role = "customer"
     return new_session
 
 
-def delete_expired_session(session: SessionDep):
-    """ Handle deletion of expired session in database
-
-    @param session: current active database session"""
-    del_session = delete(SessionModel).where(SessionModel.expire_at < func.now())
-    session.exec(del_session)
-    session.commit()
+def delete_expired_session():
+    """ Handle deletion of expired session in database"""
+    with Session(engine) as session:
+        del_session = delete(SessionModel).where(SessionModel.expire_at < func.now())
+        session.exec(del_session)
+        session.commit()
