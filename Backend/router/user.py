@@ -3,7 +3,8 @@ from fastapi import APIRouter
 import controller.seller as seller
 import controller.user as user
 from model.database import SessionDep
-from schemas.user_session_schema import UserSessionResponseModel
+from schemas.user_schema import UserSessionResponseModel, UserUpdateModel, UserUpdateResponseModel, \
+    UserChangePasswordModel
 from services.session import valid_session_dep
 
 router = APIRouter(
@@ -35,14 +36,34 @@ async def get_user_email():
     return user.fetch_user_email()
 
 
-@router.patch("/update")
-async def update_user_by_id():
-    return user.update_user_profile()
+@router.patch("/update", response_model=UserUpdateResponseModel)
+async def update_user_by_id(update_data: UserUpdateModel, db_session: SessionDep,
+                            user_session: valid_session_dep):
+    """Update user information based on the data received from request.body
+
+    :param update_data: update information sent by user
+    :param db_session: current active database session
+    :param user_session: current active user session
+
+    :return: Returns updated user data
+    """
+    user_in_db = await user.update_user_profile(update_data, db_session, user_session)
+    return {"user": user_in_db, "message": "Profile Update successful"}
 
 
 @router.patch("/change-password")
-async def change_user_password():
-    return user.update_user_password()
+async def change_user_password(change_data: UserChangePasswordModel, db_session: SessionDep,
+                               user_session: valid_session_dep):
+    """Initiate password change process where we compare old password and update database using new password
+
+    :param change_data: receive old and new password data as per request.body
+    :param db_session: current active database session
+    :param user_session: current active user session
+
+    :return: On successfully changing password sends a success message
+    """
+    await user.update_user_password(change_data, db_session, user_session)
+    return {"message": "Password changed successfully. Please login again."}
 
 
 @router.delete("/delete")
