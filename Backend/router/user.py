@@ -1,7 +1,10 @@
 from fastapi import APIRouter
 
-import controller.user as user
 import controller.seller as seller
+import controller.user as user
+from model.database import SessionDep
+from schemas.user_session_schema import UserSessionResponseModel
+from services.session import valid_session_dep
 
 router = APIRouter(
     prefix="/user",
@@ -10,8 +13,21 @@ router = APIRouter(
 
 
 @router.get("/")
-async def get_user():
-    return user.fetch_user_profile()
+async def get_user(db_session: SessionDep, user_session: valid_session_dep) -> dict[
+    str, UserSessionResponseModel | str]:
+    """Retrieve current user information based on active session data
+
+    :param db_session: current active database session
+    :param user_session: current active user session
+
+    :return: On successful verification of session_id, return user data as per database
+    """
+    if not user_session:
+        return {"message": "No active session found. Please login."}
+
+    user_in_db = await user.fetch_user_profile(db_session, user_session)
+
+    return {"user": user_in_db, "message": "User found successfully"}
 
 
 @router.get("/email")
