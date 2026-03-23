@@ -4,12 +4,12 @@ const FormInput = ({ name, type = "text", value, setFunc = null }) => {
 
   switch (labelName) {
     case "email":
-      labelName = "Email Address: ";
+      labelName = "Email Address";
       // inputPattern = "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
       type = "email";
       break;
     case "password":
-      labelName = "Password (8 characters minimum): ";
+      labelName = "Password (8 characters minimum)";
       // inputPattern =
       //   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$";
       type = "password";

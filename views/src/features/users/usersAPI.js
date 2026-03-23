@@ -10,7 +10,7 @@ const getUser = createAsyncThunk("users/getUser", async () => {
 
     const data = await response.json();
 
-    return data;
+    return data.user;
   } catch (error) {
     console.error(error);
   }

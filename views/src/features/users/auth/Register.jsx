@@ -12,7 +12,7 @@ const Register = () => {
     password: "",
     phone: "",
     address: "",
-    isSeller: false,
+    is_seller: false,
   });
 
   const handleSubmit = (e) => {
@@ -36,10 +36,10 @@ const Register = () => {
           />
         ))}
         <ToggleButton
-          value={formData.isSeller}
+          value={formData.is_seller}
           setFunc={(val) => handleChange(setFormData, "isSeller", val)}
         />
-        <button>Login</button>
+        <button>Register</button>
       </form>
       <div>
         <Link to="/auth/login">Already registered? Click here</Link>
