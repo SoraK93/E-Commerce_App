@@ -1,29 +1,54 @@
 from fastapi import HTTPException
+from fastapi.concurrency import run_in_threadpool
+from sqlalchemy.exc import IntegrityError
 from sqlmodel import select
 
 from model.database import SessionDep
 from model.user_model import UserModel
-from services.hasher import verify_password
-from schemas.login_schema import LoginResponseModel
+from schemas.login_schema import LoginResponseModel, LoginRequestModel
+from schemas.registration_schema import RegistrationRequestModel
+from services.hasher import generate_hash, verify_password
 
 
-def initiate_login(email: str, password: str, session: SessionDep) -> LoginResponseModel:
+
+async def initiate_login(login_data: LoginRequestModel, db_session: SessionDep) -> LoginResponseModel:
+    """Using the provided login_data, initiate the login process.
+
+    :param login_data: contains email and password provided by user
+    :param db_session: Current active database session
+
+    :return: user: Returns relevant user information found in database
+    """
     invalid_error = HTTPException(status_code=404, detail="Incorrect Email or Password. Please try again.")
 
-    user_in_db = session.exec(select(UserModel).where(UserModel.email == email)).first()
+    result = await db_session.exec(select(UserModel).where(UserModel.email == login_data.email))
+
+    user_in_db = result.first()
     if not user_in_db:
         raise invalid_error
-    print(user_in_db.password)
-    verified_hash = verify_password(user_in_db.password, password)
+
+    verified_hash = await run_in_threadpool(verify_password, user_in_db.password, login_data.password)
     if not verified_hash:
         raise invalid_error
 
     return LoginResponseModel(**user_in_db.model_dump())
 
 
-def initiate_logout():
-    return {"message": "Logout successful"}
+async def register_new_user(form_data: RegistrationRequestModel, db_session: SessionDep):
+    """Create a new user and store it inside database
 
+    :param form_data: contains user information
+    :param db_session: Current active database session
+    """
+    new_password_hashed = await run_in_threadpool(generate_hash, form_data.password)
+    updated_form_data = {**form_data.model_dump(exclude={"confirm_password"}), "password": new_password_hashed}
+    new_user = UserModel(**updated_form_data)
 
-def register_new_user():
-    return {"message": "user saved into database"}
+    try:
+        db_session.add(new_user)
+        await db_session.commit()
+        await db_session.refresh(new_user)
+    except IntegrityError:
+        await db_session.rollback()
+        raise HTTPException(status_code=400,
+                            detail="User already registered. Please try to login.")
