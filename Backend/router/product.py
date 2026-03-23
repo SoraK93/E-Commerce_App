@@ -1,6 +1,8 @@
 from fastapi import APIRouter
 
 import controller.product as product
+from model.database import SessionDep
+from services.session import valid_session_dep
 
 router = APIRouter(
     prefix="/product",
@@ -9,8 +11,14 @@ router = APIRouter(
 
 
 @router.get("/")
-async def get_products():
-    return product.fetch_all_product()
+async def get_products(db_session: SessionDep):
+    """Retrieve all products
+
+    :param db_session: current active database session
+
+    :return: On success, returns a list containing product information
+    """
+    return await product.fetch_all_product(db_session)
 
 
 @router.get("/{product_id}")
@@ -19,8 +27,8 @@ async def get_product_by_id():
 
 
 @router.post("/")
-async def create_new_product():
-    return product.make_a_new_product()
+async def create_new_product(user_session: valid_session_dep, db_session: SessionDep):
+    return product.make_a_new_product(user_session, db_session)
 
 
 @router.patch("/{product_id}")
