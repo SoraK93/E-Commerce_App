@@ -14,7 +14,7 @@ from model.session_model import SessionModel, user_role
 async def create_new_session(db_session: SessionDep, email: EmailStr, role: user_role):
     """Creates user session and stores it inside database
 
-    :param session: current active database session
+    :param db_session: current active database session
     :param email: user email received during login request
     :param role: set user role ["admin", "seller", "customer"]
 
@@ -37,7 +37,7 @@ async def create_new_session(db_session: SessionDep, email: EmailStr, role: user
 async def validate_session(db_session: SessionDep, session_id: Annotated[UUID | None, Cookie()] = None):
     """Verify session_id to check it has any available active session
 
-    :param session: current active database session
+    :param db_session: current active database session
     :param session_id: using UUID received from request.cookie
 
     :returns SessionModel: If an active session is found  

@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter
 
 import controller.product as product
@@ -22,8 +24,9 @@ async def get_products(db_session: SessionDep):
 
 
 @router.get("/{product_id}")
-async def get_product_by_id():
-    return product.fetch_product_by_id()
+async def get_product_by_id(product_id: UUID, db_session: SessionDep):
+    product_in_db = await product.fetch_product_by_id(product_id, db_session)
+    return [product_in_db]
 
 
 @router.post("/")

@@ -27,7 +27,7 @@ async def auth_login(login_data: LoginRequestModel, response: Response, db_sessi
     user_in_db = await auth.initiate_login(login_data, db_session)
 
     role = "seller" if user_in_db.is_seller else "customer"
-    new_session = create_new_session(db_session, user_in_db.email, role)
+    new_session = await create_new_session(db_session, user_in_db.email, role)
 
     # As a response send session_id back to client, which will be saved as cookie.
     # And later be used to verify user

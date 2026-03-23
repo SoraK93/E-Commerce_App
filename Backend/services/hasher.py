@@ -9,7 +9,7 @@ def generate_hash(password: str):
 
     :param password: password received during registration/ change-password process
 
-    :return :hashed password
+    :return: hashed password
 
     :raise HashingError: Raise error on unsuccessful hashing
     """
@@ -25,7 +25,10 @@ def verify_password(old_hash: str, password: str) -> bool:
     :param old_hash: hash stored inside the database
     :param password: password received during login request
 
-    :return: bool: Depending on the validity return True/False
+    :return: Depending on the validity return True/False
+
+    :raise VerifyMismatchError: If verification fails because hash is not valid for password.
+    :raise VerificationError: If verification fails for other reasons.
     """
     try:
         return p_hash.verify(old_hash, password)
