@@ -63,4 +63,7 @@ export const selectProduct = {
   list: (state) => state.products.productList,
   error: (state) => state.products.error,
 };
+
+export const selectProductList = (state) => state.products.productList
+
 export default productsSlice.reducer;

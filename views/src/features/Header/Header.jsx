@@ -28,7 +28,7 @@ const Header = () => {
               Cart<span>({cartList?.length})</span>
             </Link>
           </li>
-          {userInfo.name ? (
+          {userInfo?.name ? (
             <>
               <li>
                 <Link to={`/user`}>{userInfo.name}</Link>

@@ -8,6 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [passwordChangeStatus, setPasswordChangeStatus] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,31 +21,47 @@ const Login = () => {
   };
 
   useEffect(() => {
-    setLoginData((prev) => ({ ...prev, email: state?.email ?? "" }));
+    if (state?.email) {
+      setLoginData((prev) => ({ ...prev, email: state.email }));
+    }
+
+    if (state?.passwordChange) {
+      setPasswordChangeStatus(state.passwordChange);
+
+      const timer = setTimeout(() => setPasswordChangeStatus(""), 5000);
+      return () => clearTimeout(timer);
+    }
   }, [state]);
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form method="POST" onSubmit={handleSubmit}>
-        <FormInput
-          name="email"
-          value={loginData.email}
-          setFunc={(val) => handleChange(setLoginData, "email", val)}
-        />
-        <FormInput
-          name="password"
-          value={loginData.password}
-          setFunc={(val) => handleChange(setLoginData, "password", val)}
-        />
-        <button>Login</button>
-      </form>
+    <>
+      {passwordChangeStatus && (
+        <div>
+          <p>{passwordChangeStatus}</p>
+        </div>
+      )}
       <div>
-        <Link to="/auth/register">New User? Click here</Link>
-        <br />
-        <Link to="#">Forgot Password</Link>
+        <h1>Login Page</h1>
+        <form method="POST" onSubmit={handleSubmit}>
+          <FormInput
+            name="email"
+            value={loginData.email}
+            setFunc={(val) => handleChange(setLoginData, "email", val)}
+          />
+          <FormInput
+            name="password"
+            value={loginData.password}
+            setFunc={(val) => handleChange(setLoginData, "password", val)}
+          />
+          <button>Login</button>
+        </form>
+        <div>
+          <Link to="/auth/register">New User? Click here</Link>
+          <br />
+          <Link to="#">Forgot Password</Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

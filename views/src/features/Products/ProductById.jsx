@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectProduct } from "./productsSlice";
+import { selectProductList } from "./productsSlice";
 import { addToUserCart } from "../cart/api/cartAPI";
+import { Link } from "react-router";
 
 export const ProductById = () => {
   const dispatch = useDispatch();
-  const product = useSelector(selectProduct.list)[0];
-  
+  const product = useSelector(selectProductList)[0];
+
   if (!product) return null;
 
   const handleButtonClick = async (e) => {
@@ -17,7 +18,7 @@ export const ProductById = () => {
 
       await dispatch(addToUserCart(cartData));
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -26,7 +27,13 @@ export const ProductById = () => {
       <h1>{product.product_name}</h1>
       <p>{product.description}</p>
       <p>{product.price}</p>
-      <p>{product.seller_name}</p>
+      <p>
+        <Link
+          to={`/seller/${product.seller.name}`}
+          state={{ id: product.seller.id }}>
+          {product.seller.name}
+        </Link>
+      </p>
       <p>
         {product.in_stock > 10
           ? "In stock"

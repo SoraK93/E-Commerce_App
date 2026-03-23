@@ -46,22 +46,22 @@ const getEmail = async () => {
   return data.email;
 };
 
-const changeUserPassword = async ({ oldPassword, newPassword }) => {
+const changeUserPassword = async ({ old_password, new_password }) => {
   const response = await fetch(`${ENDPOINT}/user/change-password`, {
     method: "PATCH",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ oldPassword, newPassword }),
+    body: JSON.stringify({ old_password, new_password }),
   });
 
   if (!response.ok) {
-    const data = await response.json();
-    throw new Error(data.message || "Failed to change password");
+    throw new Error(response.statusText || "Failed to change password");
   }
+  const data = await response.json();
 
-  return { success: true };
+  return data.message;
 };
 
 export { getUser, updateUser, getEmail, changeUserPassword };

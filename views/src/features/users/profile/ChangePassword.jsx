@@ -33,10 +33,10 @@ const ChangePassword = () => {
 
     try {
       const result = await changeUserPassword({
-        oldPassword: password,
-        newPassword: newPassword,
+        old_password: password,
+        new_password: newPassword,
       });
-      navigate("/user", { state: { passwordChange: result.success } });
+      navigate("/auth/login", { state: { passwordChange: result } });
     } catch (err) {
       setErrorMessage(err.message);
     }

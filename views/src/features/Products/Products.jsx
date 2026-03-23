@@ -16,15 +16,20 @@ const AllProducts = () => {
       {productList.map((product) => (
         <li key={product.id}>
           <div onClick={(e) => handleOnClick(e, product.id)}>
-            <p>{product.product_name}</p>
+            <p>{product.name}</p>
             <p>{product.description}</p>
             <p>
               {product.in_stock > 10
                 ? "In stock"
                 : product.in_stock || "Out of Stock"}
             </p>
-            <p>{product.price}</p>
-            <p>{product.seller_name}</p>
+            <p>
+              {Number(product.price).toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
+              })}
+            </p>
+            <p>{product.seller.name}</p>
           </div>
         </li>
       ))}
