@@ -70,17 +70,11 @@ $ npm run dev
 
 ## TODO List
 
-:hourglass: Setup user based database schema giving access to specific tables on user level  
---> Isolating each users access to database  
-:hourglass: Implement soft delete then hard delete after 30 days  
---> Like in case of product, if we try to delete the product and it exists in order table, currently this delete will create issues. implement something like is_delete tag and delete_timestamp  
-:hourglass: Implement versioning on certain table activities like update  
---> This will create a safeguard towards unintentional overide when two prople are updating same thing  
+:hourglass: Setup user based database schema giving access to specific tables on user level --> Isolating each users access to database  
+:hourglass: Implement soft delete then hard delete after 30 days --> Like in case of product, if we try to delete the product and it exists in order table, currently this delete will create issues. implement something like is_delete tag and delete_timestamp  
+:hourglass: Implement versioning on certain table activities like update --> This will create a safeguard towards unintentional overide when two prople are updating same thing  
 :hourglass: Create excel template and system that helps seller upload loads of product at once  
-:hourglass: Create e-mail services  
---> Forget Password
---> Account verification
---> Certain process like uploading a bunch of products using excel  
+:hourglass: Create e-mail services --> Forget Password --> Account verification --> Certain process like uploading a bunch of products using excel  
 :hourglass: Implement forget password  
 :hourglass: user can visit seller profile (no permissions needed)  
 :hourglass: order crud operation  
@@ -96,7 +90,7 @@ $ npm run dev
 :white_check_mark: Setup hashing for user login  
 :white_check_mark: Setup authentication  
 :white_check_mark: Setup session & cookie  
-:white_check_mark: Use transactions for all database related requests
+:white_check_mark: Use transactions for all database related requests  
 :white_check_mark: Implement alembic to migrate and manage database changes made into python models  
 :white_check_mark: Use HTTPS connection, Create SSL/ TLS certificate  
 
