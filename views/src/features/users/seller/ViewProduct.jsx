@@ -37,7 +37,10 @@ const ViewProduct = () => {
             <p>{product.product_name}</p>
             <p>{product.description}</p>
             <p>{product.in_stock}</p>
-            <p>{product.price}</p>
+            <p>{Number(product.price).toLocaleString(undefined, {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2
+            })}</p>
             <p>{product.seller_name}</p>
             <button onClick={(e) => onButtonClick(e, product, "edit")}>
               Edit

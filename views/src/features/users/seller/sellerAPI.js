@@ -13,7 +13,7 @@ const getProductBySeller = createAsyncThunk("", async () => {
 
   if (response.status === 204) throw new Error("No product found");
 
-  return data;
+  return data.products;
 });
 
 const addProductBySeller = async (formData) => {

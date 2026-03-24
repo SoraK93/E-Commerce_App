@@ -76,6 +76,11 @@ async def get_seller_by_id():
     return seller.fetch_seller_profile()
 
 
-@router.get("/view-product")
-async def get_product_by_seller_id():
-    return seller.fetch_seller_products()
+@router.get("/view-product", response_model="")
+async def get_product_by_seller_id(db_session: SessionDep, user_session: valid_session_dep):
+    if not user_session:
+        return {"message": "Unable to retrieve products. Please try to log in."}
+
+    products_in_db = await seller.fetch_seller_products(db_session, user_session)
+
+    return {"products": products_in_db, "message": "Retrieved products successfully."}
