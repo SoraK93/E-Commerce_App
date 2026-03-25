@@ -7,6 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from router.auth import router as auth
 from router.product import router as products
 from router.user import router as user
+from router.cart import router as cart
+from router.order import router as order
 
 load_dotenv()
 
@@ -24,6 +26,8 @@ app.add_middleware(CORSMiddleware,
 app.include_router(products)
 app.include_router(auth)
 app.include_router(user)
+app.include_router(cart)
+app.include_router(order)
 
 
 @app.get("/")
