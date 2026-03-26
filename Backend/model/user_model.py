@@ -6,8 +6,7 @@ from pydantic import EmailStr
 class UserModel(SQLModel, table=True):
     __tablename__ = "customers_details"
 
-    id: uuid.UUID = Field(default_factory=uuid.uuid4,
-                          nullable=False, primary_key=True, index=True, unique=True)
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
 
     name: str = Field(max_length=60, nullable=False)
 
@@ -24,3 +23,5 @@ class UserModel(SQLModel, table=True):
     
     # will help in making products related query without writing any extra query
     products: list["ProductsModel"] = Relationship(back_populates="seller")
+    sessions: list["SessionModel"] = Relationship(back_populates="user")
+    cart: list["CartModel"] = Relationship(back_populates="user")
