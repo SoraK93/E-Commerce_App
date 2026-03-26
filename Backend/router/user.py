@@ -1,8 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 
 import controller.seller as seller
 import controller.user as user
 from model.database import SessionDep
+from schemas.product_schema import ProductResponseSellerModel
 from schemas.user_schema import UserSessionResponseModel, UserUpdateModel, UserUpdateResponseModel, \
     UserChangePasswordModel
 from services.session import valid_session_dep
@@ -31,9 +32,14 @@ async def get_user(db_session: SessionDep, user_session: valid_session_dep) -> d
     return {"user": user_in_db, "message": "User found successfully"}
 
 
-@router.get("/email")
-async def get_user_email():
-    return user.fetch_user_email()
+@router.get("/email", status_code=status.HTTP_200_OK)
+async def get_user_email(user_session: valid_session_dep):
+    """
+
+    :param user_session:
+    :return:
+    """
+    return {"email": user_session.email, "message": "User email data"}
 
 
 @router.patch("/update", response_model=UserUpdateResponseModel)
@@ -66,18 +72,27 @@ async def change_user_password(change_data: UserChangePasswordModel, db_session:
     return {"message": "Password changed successfully. Please login again."}
 
 
+# TODO: delete user profile
 @router.delete("/delete")
 async def delete_user_by_id():
     return user.delete_user_profile()
 
 
+# TODO: view seller profile
 @router.get("/seller-profile")
 async def get_seller_by_id():
     return seller.fetch_seller_profile()
 
 
-@router.get("/view-product", response_model="")
-async def get_product_by_seller_id(db_session: SessionDep, user_session: valid_session_dep):
+@router.get("/view-product", response_model=ProductResponseSellerModel)
+async def get_product_by_seller_id(db_session: SessionDep,
+                                   user_session: valid_session_dep):
+    """
+
+    :param db_session:
+    :param user_session:
+    :return:
+    """
     if not user_session:
         return {"message": "Unable to retrieve products. Please try to log in."}
 

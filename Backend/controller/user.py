@@ -22,10 +22,6 @@ async def fetch_user_profile(db_session: SessionDep, user_session: SessionModel)
     return UserSessionResponseModel(**user_in_db.model_dump())
 
 
-def fetch_user_email():
-    return {"message": "update user information"}
-
-
 async def update_user_profile(update_data: UserUpdateModel, db_session: SessionDep,
                               user_session: SessionModel) -> UserUpdateModel:
     """Checks if user exists in database; retrieve and update that data; store updated data back into database
