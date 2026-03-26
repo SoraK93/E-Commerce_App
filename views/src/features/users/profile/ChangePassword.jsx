@@ -14,6 +14,7 @@ const ChangePassword = () => {
   useEffect(() => {
     (async () => {
       try {
+        // getting user email for accessibility purpose
         const data = await getEmail();
         setEmail(data);
       } catch (err) {

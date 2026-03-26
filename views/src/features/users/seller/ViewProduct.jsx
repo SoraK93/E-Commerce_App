@@ -34,14 +34,14 @@ const ViewProduct = () => {
       {productList?.map((product) => (
         <li key={product.id}>
           <div onClick={(e) => onProductClick(e, product.id)}>
-            <p>{product.product_name}</p>
-            <p>{product.description}</p>
-            <p>{product.in_stock}</p>
-            <p>{Number(product.price).toLocaleString(undefined, {
+            <p>Product Name: {product.name}</p>
+            <p>Description: {product.description}</p>
+            <p>Quantity: {product.in_stock}</p>
+            <p>Price: {Number(product.price).toLocaleString(undefined, {
               maximumFractionDigits: 2,
               minimumFractionDigits: 2
             })}</p>
-            <p>{product.seller_name}</p>
+            <p>Seller: {product.seller.name}</p>
             <button onClick={(e) => onButtonClick(e, product, "edit")}>
               Edit
             </button>

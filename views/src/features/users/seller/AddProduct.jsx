@@ -43,10 +43,10 @@ const AddProduct = () => {
   useEffect(() => {
     if (isEdit && product) {
       setFormData({
-        name: product.product_name,
+        name: product.name,
         description: product.description,
         in_stock: product.in_stock,
-        price: product.price,
+        price: Number(product.price).toFixed(2),
       });
     } else {
       setFormData(formStruct);
@@ -65,7 +65,7 @@ const AddProduct = () => {
         {heading}
         <form method={isEdit ? "patch" : "post"} onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">Product Name:</label>
             <br />
             <input
               type="text"
@@ -76,7 +76,7 @@ const AddProduct = () => {
                 handleChange(setFormData, "name", e.target.value)
               }
               required
-              autoComplete=""
+              autoComplete="off"
             />
           </div>
           <div>
@@ -91,7 +91,7 @@ const AddProduct = () => {
                 handleChange(setFormData, "description", e.target.value)
               }
               required
-              autoComplete=""
+              autoComplete="off"
             />
           </div>
           <div>
@@ -106,7 +106,7 @@ const AddProduct = () => {
                 handleChange(setFormData, "in_stock", e.target.value)
               }
               required
-              autoComplete=""
+              autoComplete="off"
             />
           </div>
           <div>
@@ -121,7 +121,7 @@ const AddProduct = () => {
                 handleChange(setFormData, "price", e.target.value)
               }
               required
-              autoComplete=""
+              autoComplete="off"
             />
           </div>
           {submitButton}

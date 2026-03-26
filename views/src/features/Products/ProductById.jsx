@@ -24,13 +24,15 @@ export const ProductById = () => {
 
   return (
     <div>
-      <h1>{product.product_name}</h1>
+      <h1>{product.name}</h1>
       <p>{product.description}</p>
-      <p>{product.price}</p>
+      <p>{Number(product.price).toLocaleString(undefined, {
+        maximumFractionDigits:2, minimumFractionDigits:2
+      })}</p>
       <p>
         <Link
-          to={`/seller/${product.seller.name}`}
-          state={{ id: product.seller.id }}>
+          to={`/seller-profile/${product.seller.name}`}
+          state={{ sellerId: product.seller.id }}>
           {product.seller.name}
         </Link>
       </p>

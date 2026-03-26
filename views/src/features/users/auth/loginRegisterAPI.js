@@ -9,10 +9,10 @@ const loginAPI = async (formData) => {
     credentials: "include",
     body: JSON.stringify(formData),
   });
-
+  console.log(response)
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Login failed");
+    throw new Error(response.statusText || "Login failed");
   }
   return data;
 };

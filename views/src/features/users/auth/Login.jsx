@@ -16,7 +16,7 @@ const Login = () => {
       await loginAPI(loginData);
       navigate("/");
     } catch (error) {
-      console.error("Login failed:", error.message);
+      console.error("Login failed:", error);
     }
   };
 
