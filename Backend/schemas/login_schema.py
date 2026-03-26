@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 
 class LoginRequestModel(BaseModel):
@@ -6,9 +6,16 @@ class LoginRequestModel(BaseModel):
     password: str
 
 
-class LoginResponseModel(BaseModel):
+class LoginModel(BaseModel):
     name: str
     phone: str
     address: str
     email: EmailStr
     is_seller: bool
+
+
+class LoginResponseModel(BaseModel):
+    user: LoginModel
+    message: str
+
+    model_config = ConfigDict(from_attributes=True, extra='ignore')
