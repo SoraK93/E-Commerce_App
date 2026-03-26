@@ -1,17 +1,17 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from fastapi.concurrency import run_in_threadpool
 from sqlalchemy.exc import IntegrityError
 from sqlmodel import select
 
 from model.database import SessionDep
 from model.user_model import UserModel
-from schemas.login_schema import LoginResponseModel, LoginRequestModel
+from schemas.login_schema import LoginRequestModel
 from schemas.registration_schema import RegistrationRequestModel
 from services.hasher import generate_hash, verify_password
 
 
 
-async def initiate_login(login_data: LoginRequestModel, db_session: SessionDep) -> LoginResponseModel:
+async def initiate_login(login_data: LoginRequestModel, db_session: SessionDep):
     """Using the provided login_data, initiate the login process.
 
     :param login_data: contains email and password provided by user
@@ -19,11 +19,12 @@ async def initiate_login(login_data: LoginRequestModel, db_session: SessionDep) 
 
     :return: user: Returns relevant user information found in database
     """
-    invalid_error = HTTPException(status_code=404, detail="Incorrect Email or Password. Please try again.")
+    invalid_error = HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                                  detail="Incorrect Email or Password. Please try again.")
 
     result = await db_session.exec(select(UserModel).where(UserModel.email == login_data.email))
 
-    user_in_db = result.first()
+    user_in_db: UserModel | None = result.first()
     if not user_in_db:
         raise invalid_error
 
@@ -31,7 +32,7 @@ async def initiate_login(login_data: LoginRequestModel, db_session: SessionDep) 
     if not verified_hash:
         raise invalid_error
 
-    return LoginResponseModel(**user_in_db.model_dump())
+    return user_in_db
 
 
 async def register_new_user(form_data: RegistrationRequestModel, db_session: SessionDep):
@@ -50,5 +51,5 @@ async def register_new_user(form_data: RegistrationRequestModel, db_session: Ses
         await db_session.refresh(new_user)
     except IntegrityError:
         await db_session.rollback()
-        raise HTTPException(status_code=400,
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="User already registered. Please try to login.")
