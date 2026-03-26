@@ -10,7 +10,7 @@ This is a full stack application. It will contain all the basic features found i
 
 > [!IMPORTANT]  
 > **Major Change:** Migrating to python backend using FastAPI Framework.  
-> **Status:** Implement all product and user related routes
+> **Status:** Implement seller, cart & order related routes
 
 > [!TIP]  
 > The current state of the project can get confusing. So, I would like to clear up few things. **'Backend'** folder contains code related to **python migration**; **'views'** folder contain code related to **frontend** and **other** folders contain code of the **old Express/NodeJs backend**.
@@ -72,6 +72,8 @@ $ npm run dev
 
 :hourglass: Setup user based database schema giving access to specific tables on user level --> Isolating each users access to database  
 :hourglass: Implement soft delete then hard delete after 30 days --> Like in case of product, if we try to delete the product and it exists in order table, currently this delete will create issues. implement something like is_delete tag and delete_timestamp  
+:hourglass: create a seperate delete-tab in seller profile to check soft deleted products  
+:hourglass: Implement scheduler on products table to auto-hard-delete products that was "deleted" 30-days ago  
 :hourglass: Implement versioning on certain table activities like update --> This will create a safeguard towards unintentional overide when two prople are updating same thing  
 :hourglass: Create excel template and system that helps seller upload loads of product at once  
 :hourglass: Create e-mail services --> Forget Password --> Account verification --> Certain process like uploading a bunch of products using excel  
@@ -87,12 +89,16 @@ $ npm run dev
 
 ### Backend
 
-:white_check_mark: Setup hashing for user login  
+:white_check_mark: Implemented Products - Fetch All, Fetch by Id, Add new product, Update existing product, apply soft delete  
+:white_check_mark: Implemented user login, registration, and logout  
+:white_check_mark: Users can view their profile, update it, change password (results in getting logged out of all logged in devices)  
+:white_check_mark: Setup password hashing for user login, change-password and registration   
 :white_check_mark: Setup authentication  
 :white_check_mark: Setup session & cookie  
 :white_check_mark: Use transactions for all database related requests  
 :white_check_mark: Implement alembic to migrate and manage database changes made into python models  
 :white_check_mark: Use HTTPS connection, Create SSL/ TLS certificate  
+
 
 ### Frontend
 
