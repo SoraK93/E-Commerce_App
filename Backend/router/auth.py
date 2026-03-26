@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Response, BackgroundTasks
+from fastapi import APIRouter, Response, BackgroundTasks, status
 
 import controller.auth as auth
 from model.database import SessionDep
-from schemas.login_schema import LoginRequestModel, LoginResponseModel
+from schemas.login_schema import LoginRequestModel, LoginResponseModel, LoginModel
 from schemas.registration_schema import RegistrationRequestModel
 from services.session import create_new_session, delete_expired_session, valid_session_dep
 
@@ -12,9 +12,9 @@ router = APIRouter(
 )
 
 
-@router.post("/login")
+@router.post("/login", status_code=status.HTTP_200_OK, response_model=LoginResponseModel)
 async def auth_login(login_data: LoginRequestModel, response: Response, db_session: SessionDep,
-                     background_task: BackgroundTasks) -> dict[str, LoginResponseModel | str]:
+                     background_task: BackgroundTasks):
     """Initiate user login process and send session_id to manage the active session
 
     :param login_data: user login data received as per request.body
@@ -25,9 +25,10 @@ async def auth_login(login_data: LoginRequestModel, response: Response, db_sessi
     :return: On successful login, returns user data found in database
     """
     user_in_db = await auth.initiate_login(login_data, db_session)
+    user_data = LoginModel(**user_in_db.model_dump())
 
     role = "seller" if user_in_db.is_seller else "customer"
-    new_session = await create_new_session(db_session, user_in_db.email, role)
+    new_session = await create_new_session(db_session, user_in_db.id, user_in_db.email, role)
 
     # As a response send session_id back to client, which will be saved as cookie.
     # And later be used to verify user
@@ -41,10 +42,10 @@ async def auth_login(login_data: LoginRequestModel, response: Response, db_sessi
     # Add deletion of expired session as a background task
     background_task.add_task(delete_expired_session)
 
-    return {"user": user_in_db, "message": "Login successful"}
+    return LoginResponseModel(user=user_data, message="Login successful")
 
 
-@router.post("/register")
+@router.post("/register", status_code=status.HTTP_201_CREATED, response_model=dict[str, str])
 async def auth_register(registration_data: RegistrationRequestModel, db_session: SessionDep) -> dict[
     str, str]:
     """Initiate new user registration process

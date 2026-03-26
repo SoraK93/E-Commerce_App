@@ -11,17 +11,18 @@ from model.database import SessionDep, engine
 from model.session_model import SessionModel, user_role
 
 
-async def create_new_session(db_session: SessionDep, email: EmailStr, role: user_role):
+async def create_new_session(db_session: SessionDep, user_id: UUID, email: EmailStr, role: user_role):
     """Creates user session and stores it inside database
 
     :param db_session: current active database session
+    :param user_id: current user id
     :param email: user email received during login request
     :param role: set user role ["admin", "seller", "customer"]
 
     :returns session: return newly created session data
     
     :raise HTTPException: if session creation fails."""
-    new_session = SessionModel(role=role, email=email)
+    new_session = SessionModel(role=role, user_id=user_id, email=email)
 
     try:
         db_session.add(new_session)
