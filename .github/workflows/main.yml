@@ -12,4 +12,4 @@ jobs:
       - name: Wake up Backend
         run: curl -I https://e-commerce-app-kamg.onrender.com/docs
       - name: Wake up Frontend
-        run: https://e-commerce-app-frontend-hm71.onrender.com
+        run: curl -I https://e-commerce-app-frontend-hm71.onrender.com
