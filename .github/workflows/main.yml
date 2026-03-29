@@ -1,0 +1,15 @@
+name: Keep Alive
+
+on:
+  schedule:
+    - cron: '*/14 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wake up Backend
+        run: curl -I https://e-commerce-app-kamg.onrender.com/docs
+      - name: Wake up Frontend
+        run: https://e-commerce-app-frontend-hm71.onrender.com
