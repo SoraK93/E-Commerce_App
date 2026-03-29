@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     S_SECRET: str
     # Frontend URL
     CLIENT_URL: str
+    RENDER_URL: str
 
     model_config = SettingsConfigDict(env_file=".env",
                                       extra="ignore")

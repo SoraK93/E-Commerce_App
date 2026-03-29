@@ -1,3 +1,5 @@
+import os
+
 from config import setting
 import uvicorn
 from dotenv import load_dotenv
@@ -18,7 +20,7 @@ app = FastAPI(
 )
 
 app.add_middleware(CORSMiddleware,
-                   allow_origins=[setting.CLIENT_URL],
+                   allow_origins=[setting.CLIENT_URL, setting.RENDER_URL],
                    allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"])
@@ -36,11 +38,20 @@ async def root():
 
 
 if __name__ == "__main__":
-    uvicorn.run(
-        "main:app",
-        host=setting.SERVER_HOST,
-        port=setting.SERVER_PORT,
-        reload=True,
-        ssl_certfile="./localhost+3.pem",
-        ssl_keyfile="./localhost+3-key.pem"
-    )
+    if os.getenv("RENDER"):
+        print("Starting Production Server...")
+        uvicorn.run(
+            "main:app",
+            host=setting.SERVER_HOST,
+            port=setting.SERVER_PORT,
+        )
+    else:
+        print("Starting Local Development Server with SSL...")
+        uvicorn.run(
+            "main:app",
+            host=setting.SERVER_HOST,
+            port=setting.SERVER_PORT,
+            reload=True,
+            ssl_certfile="./localhost+3.pem",
+            ssl_keyfile="./localhost+3-key.pem"
+        )
