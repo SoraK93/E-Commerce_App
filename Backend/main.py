@@ -1,11 +1,13 @@
 import os
 
-from config import setting
+import model
+
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from config import setting
 from router.auth import router as auth
 from router.product import router as products
 from router.user import router as user
