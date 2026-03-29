@@ -1,1 +1,1 @@
-export const ENDPOINT = "https://localhost:43576";
+export const ENDPOINT = import.meta.env.VITE_BACKEND_URL || "https://localhost:43576";
