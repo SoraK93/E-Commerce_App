@@ -15,33 +15,33 @@ const Header = () => {
 
   return (
     <header>
-      <nav>
-        <ul>
-          <li>
+      <nav className="h-12 content-center">
+        <ul className="flex justify-between gap-8 text-2xl">
+          <li className="p-2">
             <Link to="/">LOGO</Link>
           </li>
-          <li>
-            <input type="text" placeholder="Search Bar" />
+          <li className="w-xl p-2">
+            <input type="text" placeholder="Search Bar" className="h-8" />
           </li>
-          <li>
-            <Link to="/cart">
+          <li className="flex justify-around group p-2">
+            <Link to="/cart" className="px-2">
               Cart<span>({cartList?.length})</span>
             </Link>
+            {userInfo?.name ? (
+              <>
+                <Link to={`/user`} className="px-2">
+                  {userInfo.name}
+                </Link>
+                <a onClick={handleClick} className="px-2">
+                  Logout
+                </a>
+              </>
+            ) : (
+              <Link to="/auth/login" className="px-2">
+                Login
+              </Link>
+            )}
           </li>
-          {userInfo?.name ? (
-            <>
-              <li>
-                <Link to={`/user`}>{userInfo.name}</Link>
-              </li>
-              <li>
-                <a onClick={handleClick}>Logout</a>
-              </li>
-            </>
-          ) : (
-            <li>
-              <Link to="/auth/login">Login</Link>
-            </li>
-          )}
         </ul>
       </nav>
     </header>

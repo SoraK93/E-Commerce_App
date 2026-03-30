@@ -12,10 +12,10 @@ const AllProducts = () => {
   };
 
   return (
-    <ul>
-      {productList.map((product) => (
-        <li key={product.id}>
-          <div onClick={(e) => handleOnClick(e, product.id)}>
+    <ul className="flex-auto">
+      {productList?.map((product) => (
+        <li key={product.id} className="border odd:bg-amber-400 even:bg-blue-300">
+          <div onClick={(e) => handleOnClick(e, product.id)} className="">
             <p>{product.name}</p>
             <p>{product.description}</p>
             <p>
