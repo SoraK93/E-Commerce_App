@@ -39,6 +39,11 @@ async def root():
     return {"message": "Welcome to E-Commerce App Backend"}
 
 
+@app.get("/health-check")
+async def health_check():
+    return {"message": "Running successfully"}
+
+
 if __name__ == "__main__":
     if os.getenv("RENDER"):
         print("Starting Production Server...")
