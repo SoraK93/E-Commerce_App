@@ -39,6 +39,11 @@ async def root():
     return {"message": "Welcome to E-Commerce App Backend"}
 
 
+@app.get("/health-check")
+async def health_check():
+    return {"message": "Running successfully"}
+
+
 if __name__ == "__main__":
     if os.getenv("RENDER"):
         print("Starting Production Server...")
@@ -46,8 +51,6 @@ if __name__ == "__main__":
             "main:app",
             host=setting.SERVER_HOST,
             port=setting.SERVER_PORT,
-            proxy_headers=True,
-            forwarded_allow_ips="*"
         )
     else:
         print("Starting Local Development Server with SSL...")
