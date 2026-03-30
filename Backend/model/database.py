@@ -12,7 +12,11 @@ DATABASE_URL = os.environ["DB_URL"]
 
 engine = create_async_engine(url=DATABASE_URL,
                              echo=True,
-                             pool_pre_ping=True)
+                             pool_pre_ping=True,
+                             connect_args={
+                                 "command_timeout": 60,
+                                 "timeout": 60
+                             })
 
 
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
