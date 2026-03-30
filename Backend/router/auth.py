@@ -36,7 +36,7 @@ async def auth_login(login_data: LoginRequestModel, response: Response, db_sessi
                         value=str(new_session.id),
                         httponly=True,
                         secure=True,
-                        samesite="lax",
+                        samesite="none",
                         max_age=60 * 60 * 24)
 
     # Add deletion of expired session as a background task

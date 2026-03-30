@@ -51,6 +51,8 @@ if __name__ == "__main__":
             "main:app",
             host=setting.SERVER_HOST,
             port=setting.SERVER_PORT,
+            proxy_headers=True,
+            forwarded_allow_ips="*"
         )
     else:
         print("Starting Local Development Server with SSL...")
