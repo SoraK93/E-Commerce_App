@@ -3,7 +3,7 @@ import { ENDPOINT } from "../CONSTANT";
 
 const getUser = createAsyncThunk("users/getUser", async () => {
   try {
-    const response = await fetch(`${ENDPOINT}/user`, {
+    const response = await fetch(`${ENDPOINT}/user/`, {
       method: "GET",
       credentials: "include",
     });

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ENDPOINT } from "../../CONSTANT";
 
 const getUserCart = createAsyncThunk("cart/getUserCart", async () => {
-  const response = await fetch(`${ENDPOINT}/cart`, {
+  const response = await fetch(`${ENDPOINT}/cart/`, {
     method: "GET",
     credentials: "include",
   });
@@ -15,7 +15,7 @@ const getUserCart = createAsyncThunk("cart/getUserCart", async () => {
 });
 
 const addToUserCart = createAsyncThunk("cart/addToUserCart", async (cart) => {
-  const response = await fetch(`${ENDPOINT}/cart`, {
+  const response = await fetch(`${ENDPOINT}/cart/`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -32,7 +32,7 @@ const addToUserCart = createAsyncThunk("cart/addToUserCart", async (cart) => {
 });
 
 const updateUserCart = createAsyncThunk("cart/updateUserCart", async (cart) => {
-  const response = await fetch(`${ENDPOINT}/cart`, {
+  const response = await fetch(`${ENDPOINT}/cart/`, {
     method: "PATCH",
     credentials: "include",
     headers: {

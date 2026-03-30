@@ -4,7 +4,7 @@ import { ENDPOINT } from "../CONSTANT"
 export const getAllProduct = createAsyncThunk(
   "products/getAllProduct",
   async () => {
-    const response = await fetch(`${ENDPOINT}/product`);
+    const response = await fetch(`${ENDPOINT}/product/`);
     const data = await response.json();
     return data;
   },

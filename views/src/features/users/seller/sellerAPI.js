@@ -17,7 +17,7 @@ const getProductBySeller = createAsyncThunk("", async () => {
 });
 
 const addProductBySeller = async (formData) => {
-  const response = await fetch(`${ENDPOINT}/product`, {
+  const response = await fetch(`${ENDPOINT}/product/`, {
     method: "POST",
     credentials: "include",
     headers: {
