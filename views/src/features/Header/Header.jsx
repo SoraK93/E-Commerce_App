@@ -15,29 +15,51 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="h-12 content-center">
-        <ul className="flex justify-between gap-8 text-2xl">
+      <nav className="h-12 content-center bg-gray-800 text-gray-200">
+        <ul className="flex justify-between gap-8 text-xl">
           <li className="p-2">
-            <Link to="/">LOGO</Link>
+            <Link to="/">SKYCART</Link>
           </li>
           <li className="w-xl p-2">
-            <input type="text" placeholder="Search Bar" className="h-8" />
+            <div className="flex rounded-md border-2 border-gray-500 bg-gray-200">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search Item"
+                className="h-9.5/10 w-9/10 rounded-md bg-white ps-3 placeholder:ps-3 placeholder:text-xl placeholder:text-gray-800"
+              />
+              <span className="material-symbols-outlined m-auto text-gray-500">
+                search
+              </span>
+            </div>
           </li>
-          <li className="flex justify-around group p-2">
-            <Link to="/cart" className="px-2">
+          <li className="flex justify-around gap-2 p-1">
+            <Link
+              to="/cart"
+              className="content-center rounded-2xl px-2 hover:bg-gray-300 hover:text-gray-800"
+            >
               Cart<span>({cartList?.length})</span>
             </Link>
             {userInfo?.name ? (
               <>
-                <Link to={`/user`} className="px-2">
+                <Link
+                  to={`/user`}
+                  className="content-center rounded-2xl px-2 hover:bg-gray-300 hover:text-gray-800"
+                >
                   {userInfo.name}
                 </Link>
-                <a onClick={handleClick} className="px-2">
+                <a
+                  onClick={handleClick}
+                  className="cursor-pointer content-center rounded-2xl px-2 hover:bg-gray-300 hover:text-gray-800"
+                >
                   Logout
                 </a>
               </>
             ) : (
-              <Link to="/auth/login" className="px-2">
+              <Link
+                to="/auth/login"
+                className="content-center rounded-2xl px-2 hover:bg-gray-300"
+              >
                 Login
               </Link>
             )}
