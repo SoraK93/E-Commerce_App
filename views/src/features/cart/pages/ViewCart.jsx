@@ -33,25 +33,27 @@ const ViewCart = () => {
     <div>
       <ul>
         {cartList.map((cart) => (
-          <li key={`cart-${cart.product_name}-${cart.customer_name}`}>
+          <li key={`cart-${cart.id}`}>
             <p>
               Product Name:{" "}
-              <Link to={`/product/${cart.product_id}`}>
-                {cart.product_name}
+              <Link to={`/product/${cart.product.id}`}>
+                {cart.product.name}
               </Link>
             </p>
             <div>
-              <button
-                onClick={(e) => onClickChangeQuantity(e, cart.product_id)}
-              >
-                -
-              </button>
-              <span>Quantity: {cart.quantity}</span>
-              <button
-                onClick={(e) => onClickChangeQuantity(e, cart.product_id)}
-              >
-                +
-              </button>
+              <p>Quantity: {cart.quantity}</p>
+              <div>
+                <button
+                  onClick={(e) => onClickChangeQuantity(e, cart.product.id)}
+                >
+                  -
+                </button>
+                <button
+                  onClick={(e) => onClickChangeQuantity(e, cart.product.id)}
+                >
+                  +
+                </button>
+              </div>
             </div>
             <p>Total Price: {cart.total}</p>
           </li>

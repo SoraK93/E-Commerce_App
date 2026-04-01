@@ -15,12 +15,12 @@ const handleRejected = (state, action) => {
 };
 
 const findTargetCart = (list, id) => {
-  return list.find((cart) => cart.product_id === id);
+  return list.find((cart) => cart.product.id === id);
 };
 
 const sortCart = (cart) => {
   if (!Array.isArray(cart)) return [];
-  return [...cart].sort((a, b) => a.product_id.localeCompare(b.product_id));
+  return [...cart].sort((a, b) => a.id.localeCompare(b.id));
 };
 
 const cartSlice = createSlice({
@@ -29,7 +29,7 @@ const cartSlice = createSlice({
   reducers: {
     increment(state, action) {
       const cart = findTargetCart(state.cartList, action.payload);
-      if (cart.quantity < cart.in_stock) cart.quantity++;
+      if (cart.quantity < cart.product.in_stock) cart.quantity++;
     },
     decrement(state, action) {
       const cart = findTargetCart(state.cartList, action.payload);

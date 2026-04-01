@@ -11,7 +11,7 @@ const getUserCart = createAsyncThunk("cart/getUserCart", async () => {
 
   const data = await response.json();
   
-  return { cart: data };
+  return { cart: data.cart };
 });
 
 const addToUserCart = createAsyncThunk("cart/addToUserCart", async (cart) => {
