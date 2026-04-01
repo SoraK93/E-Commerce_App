@@ -10,7 +10,8 @@ This is a full stack application. It will contain all the basic features found i
 
 > [!IMPORTANT]  
 > **Major Change:** Migrating to python backend using FastAPI Framework.  
-> **Status:** Implement seller, cart & order related routes
+> **Frontend Status:** Styling components one at a time.  
+> **Backend Status:** Implementing seller, cart & order related routes.
 
 > [!TIP]  
 > The current state of the project can get confusing. So, I would like to clear up few things. **'Backend'** folder contains code related to **python migration**; **'views'** folder contain code related to **frontend** and **other** folders contain code of the **old Express/NodeJs backend**.
@@ -86,11 +87,13 @@ $ npm run dev
 :hourglass: Setup authorisation  
 :hourglass: Structure backend file in a organized manner  
 :hourglass: making sure all api follows a certain return structure  
+:hourglass: Implement auto-save feature for cart (using lodash/debounce)
 
 ### Backend
 
 :white_check_mark: Implemented Products - Fetch All, Fetch by Id, Add new product, Update existing product, apply soft delete  
 :white_check_mark: Implemented user login, registration, and logout  
+:white_check_mark: Implemented view cart, add to cart  
 :white_check_mark: Users can view their profile, update it, change password (results in getting logged out of all logged in devices)  
 :white_check_mark: Setup password hashing for user login, change-password and registration   
 :white_check_mark: Setup authentication  
