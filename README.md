@@ -10,8 +10,8 @@ This is a full stack application. It will contain all the basic features found i
 
 > [!IMPORTANT]  
 > **Major Change:** Migrating to python backend using FastAPI Framework.  
-> **Frontend Status:** Styling components one at a time.  
-> **Backend Status:** Implementing seller, cart & order related routes.
+> **Frontend Status:** Styling components & Minor component update to due changes in backend logic.  
+> **Backend Status:** Implementing order related path operations.
 
 > [!TIP]  
 > The current state of the project can get confusing. So, I would like to clear up few things. **'Backend'** folder contains code related to **python migration**; **'views'** folder contain code related to **frontend** and **other** folders contain code of the **old Express/NodeJs backend**.
@@ -93,7 +93,7 @@ $ npm run dev
 
 :white_check_mark: Implemented Products - Fetch All, Fetch by Id, Add new product, Update existing product, apply soft delete  
 :white_check_mark: Implemented user login, registration, and logout  
-:white_check_mark: Implemented view cart, add to cart  
+:white_check_mark: Implemented view cart, add to cart, update quantity and remove item from cart  
 :white_check_mark: Users can view their profile, update it, change password (results in getting logged out of all logged in devices)  
 :white_check_mark: Setup password hashing for user login, change-password and registration   
 :white_check_mark: Setup authentication  
@@ -109,3 +109,20 @@ $ npm run dev
 :white_check_mark: cart crud operation  
 :white_check_mark: Use HTTPS connection, Create SSL/ TLS certificate  
 
+## Stack Detail
+
+### Frontend Stack
+- JavaScript (Language)
+- TypeScript (migration - on hold)
+- ReactJs (Web & UI library)
+- Redux-Toolkit (handling state)
+- React-Router (handling routing)
+
+### Backend Stack
+- Python (Language)
+- FastAPI (API Framework)
+- SQLModel (SQL ORM)
+- Alembic (for migration)
+
+### Database
+- PostgreSQL
