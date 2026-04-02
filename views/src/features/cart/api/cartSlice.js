@@ -1,5 +1,10 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getUserCart, addToUserCart, updateUserCart } from "./cartAPI";
+import {
+  getUserCart,
+  addToUserCart,
+  updateUserCart,
+  deleteItemUserCart,
+} from "./cartAPI";
 
 const initialState = {
   loading: "initial",
@@ -33,7 +38,7 @@ const cartSlice = createSlice({
     },
     decrement(state, action) {
       const cart = findTargetCart(state.cartList, action.payload);
-      if (cart.quantity > 0) cart.quantity--;
+      if (cart.quantity > 1) cart.quantity--;
     },
   },
   extraReducers: (builder) => {
@@ -46,11 +51,16 @@ const cartSlice = createSlice({
       .addCase(addToUserCart.fulfilled, (state, action) => {
         state.loading = "fullfilled";
         state.cartList.push(...action.payload.cart);
-        state.cartList = sortCart(state.cartList);
       })
       .addCase(updateUserCart.fulfilled, (state, action) => {
         state.loading = "fulfilled";
         state.cartList = sortCart(action.payload.cart);
+      })
+      .addCase(deleteItemUserCart.fulfilled, (state, action) => {
+        state.loading = "fulfilled";
+        state.cartList = state.cartList.filter(
+          (cart) => cart.id != action.payload.cart,
+        );
       })
       // pending cases
       .addMatcher(
@@ -58,6 +68,7 @@ const cartSlice = createSlice({
           getUserCart.pending,
           addToUserCart.pending,
           updateUserCart.pending,
+          deleteItemUserCart.pending,
         ),
         handlePending,
       )
@@ -67,6 +78,7 @@ const cartSlice = createSlice({
           getUserCart.rejected,
           addToUserCart.rejected,
           updateUserCart.rejected,
+          deleteItemUserCart.rejected,
         ),
         handleRejected,
       );
