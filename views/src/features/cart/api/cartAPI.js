@@ -47,4 +47,23 @@ const updateUserCart = createAsyncThunk("cart/updateUserCart", async (cart) => {
   return { cart: data };
 });
 
-export { getUserCart, addToUserCart, updateUserCart };
+const deleteItemUserCart = createAsyncThunk(
+  "cart/deleteItemUserCart",
+  async (cartId) => {
+    const response = await fetch(`${ENDPOINT}/cart/${cartId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Unable to remove item from cart");
+    }
+
+    return { cart: cartId };
+  },
+);
+
+export { getUserCart, addToUserCart, updateUserCart, deleteItemUserCart };
