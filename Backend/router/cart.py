@@ -1,4 +1,7 @@
-from fastapi import APIRouter, status
+from typing import Annotated
+from uuid import UUID
+
+from fastapi import APIRouter, status, Body
 
 import controller.cart as cart
 from model.database import SessionDep
@@ -25,6 +28,12 @@ async def create_new_cart(product_data: CartAddProductModel, db_session: Session
     return CartResponseModel(cart=cart_in_db, message="Item added to cart successfully")
 
 
-@router.patch("/")
-async def update_cart(product_data: CartAddProductModel, db_session: SessionDep, user_session: valid_session_dep):
-    await cart.edit_item_quantity(product_data, db_session, user_session)
+@router.patch("/", status_code=status.HTTP_204_NO_CONTENT)
+async def update_cart(product_list: Annotated[list[CartAddProductModel], Body()], db_session: SessionDep,
+                      user_session: valid_session_dep):
+    await cart.edit_item_quantity(product_list, db_session, user_session)
+
+
+@router.delete("/{cart_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_cart_item(cart_id: UUID, db_session: SessionDep, user_session: valid_session_dep):
+    await cart.remove_item_from_cart(cart_id, db_session)

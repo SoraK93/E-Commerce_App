@@ -1,4 +1,3 @@
-from decimal import Decimal
 from uuid import UUID
 
 from pydantic import BaseModel, Field, computed_field, ConfigDict
@@ -6,7 +5,7 @@ from pydantic import BaseModel, Field, computed_field, ConfigDict
 
 class CartAddProductModel(BaseModel):
     product_id: UUID
-    quantity: int
+    quantity: int = Field(gt=0)
 
 
 class CartProductModel(BaseModel):
