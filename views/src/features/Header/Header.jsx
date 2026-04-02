@@ -34,14 +34,14 @@ const Header = () => {
             </div>
           </li>
           <li className="flex justify-around gap-2 p-1">
-            <Link
-              to="/cart"
-              className="content-center rounded-2xl px-2 hover:bg-gray-300 hover:text-gray-800"
-            >
-              Cart<span>({cartList?.length})</span>
-            </Link>
             {userInfo?.name ? (
               <>
+                <Link
+                  to="/cart"
+                  className="content-center rounded-2xl px-2 hover:bg-gray-300 hover:text-gray-800"
+                >
+                  Cart<span>({cartList?.length})</span>
+                </Link>
                 <Link
                   to={`/user`}
                   className="content-center rounded-2xl px-2 hover:bg-gray-300 hover:text-gray-800"
@@ -58,7 +58,7 @@ const Header = () => {
             ) : (
               <Link
                 to="/auth/login"
-                className="content-center rounded-2xl px-2 hover:bg-gray-300"
+                className="content-center rounded-2xl px-2 hover:bg-gray-300 hover:text-gray-800"
               >
                 Login
               </Link>
