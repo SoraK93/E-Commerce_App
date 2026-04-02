@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, selectCartList } from "../api/cartSlice";
 import { Link, useNavigate } from "react-router";
-import { updateUserCart } from "../api/cartAPI";
+import { deleteItemUserCart, updateUserCart } from "../api/cartAPI";
 
 const ViewCart = () => {
   const dispatch = useDispatch();
@@ -16,18 +16,22 @@ const ViewCart = () => {
       : dispatch(decrement(product_id));
   };
 
-  const onClickSaveCart = async (e, product_id) => {
+  const onClickSaveCart = async () => {
     const cartToUpdate = cartList.map((cart) => ({
-      product_id: cart.product_id,
+      product_id: cart.product.id,
       quantity: cart.quantity,
     }));
     await dispatch(updateUserCart(cartToUpdate));
-    navigate(-1);
+    // navigate(-1);
   };
 
   const onClickCheckout = () => {
     navigate("/order");
   };
+
+  const onClickRemoveItem = async (cartId) => {
+    await dispatch(deleteItemUserCart(cartId));
+  }
 
   return (
     <div>
@@ -56,6 +60,7 @@ const ViewCart = () => {
               </div>
             </div>
             <p>Total Price: {cart.total}</p>
+            <button onClick={() => onClickRemoveItem(cart.id)}>Remove Item</button>
           </li>
         ))}
       </ul>
