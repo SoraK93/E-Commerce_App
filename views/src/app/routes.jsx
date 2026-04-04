@@ -79,50 +79,51 @@ export const AppRoutes = createBrowserRouter([
           },
         ],
       },
-    ],
-  },
-  {
-    path: "cart",
-    lazy: () => import("../features/cart/pages/Cart"),
-    HydrateFallback: fallback,
-  },
-  {
-    path: "order",
-    lazy: () => import("../features/orders/Order"),
-    HydrateFallback: () => fallback("Order"),
-    children: [
       {
-        index: true,
-        lazy: () => import("../features/orders/components/ConfirmOrderDetail"),
+        path: "auth",
+        children: [
+          // Login Page
+          {
+            path: "login",
+            element: <Login />,
+          },
+          //  Registration Page
+          {
+            path: "register",
+            element: <Register />,
+          },
+          {
+            path: "logout",
+            action: async () => {
+              // fetch
+              await logoutAPI();
+              return redirect("/");
+            },
+          },
+        ],
+      },
+      {
+        path: "cart",
+        lazy: () => import("../features/cart/pages/Cart"),
+        HydrateFallback: fallback,
+      },
+      {
+        path: "order",
+        lazy: () => import("../features/orders/Order"),
         HydrateFallback: () => fallback("Order"),
-      },
-      {
-        path: "place-order",
-        lazy: () => import("../features/orders/components/PlaceOrder"),
-        HydrateFallback: () => fallback("Order"),
-      },
-    ],
-  },
-  {
-    path: "auth",
-    children: [
-      // Login Page
-      {
-        path: "login",
-        element: <Login />,
-      },
-      //  Registration Page
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "logout",
-        action: async () => {
-          // fetch
-          await logoutAPI();
-          return redirect("/");
-        },
+        children: [
+          {
+            index: true,
+            lazy: () =>
+              import("../features/orders/components/ConfirmOrderDetail"),
+            HydrateFallback: () => fallback("Order"),
+          },
+          {
+            path: "place-order",
+            lazy: () => import("../features/orders/components/PlaceOrder"),
+            HydrateFallback: () => fallback("Order"),
+          },
+        ],
       },
     ],
   },
