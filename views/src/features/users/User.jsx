@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { selectUser } from "./usersSlice";
+import { selectUserInfo } from "./usersSlice";
 import { Link, Outlet } from "react-router";
 
 const User = () => {
-  const userInfo = useSelector(selectUser.info);
+  const userInfo = useSelector(selectUserInfo);
 
   return (
     <div>

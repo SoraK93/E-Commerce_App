@@ -1,9 +1,10 @@
 import { Outlet } from "react-router";
 
-import { Header, Footer } from "../features";
-import { getUserCart } from "../features/cart/api/cartAPI";
-import { getUser } from "../features/users/usersAPI";
-import { handleStoreDispatch } from "../utilities/route-helper";
+import { getUserCart } from "@features/cart/api/cartAPI";
+import { getUser } from "@features/users/usersAPI";
+import { handleStoreDispatch } from "@utilities/route-helper";
+import { Header } from "@features/Header/Header";
+import { Footer } from "@features/Footer/Footer";
 
 function App() {
   return (

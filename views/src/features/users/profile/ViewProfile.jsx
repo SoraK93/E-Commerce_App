@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectUser } from "../usersSlice";
+import { selectUserInfo } from "../usersSlice";
 
 const ViewProfile = () => {
-  const userInfo = useSelector(selectUser.info);
+  const userInfo = useSelector(selectUserInfo);
 
   return (
     <>

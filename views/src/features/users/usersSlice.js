@@ -44,9 +44,8 @@ const user = createSlice({
   },
 });
 
-export const selectUser = {
-  info: (state) => state.users.info,
-  loading: (state) => state.users.loading,
-  error: (state) => state.users.error,
-};
+export const selectUserInfo = (state) => state.users.info
+export const selectUserLoading = (state) => state.users.loading
+export const selectUserError = (state) => state.users.error
+
 export default user.reducer;

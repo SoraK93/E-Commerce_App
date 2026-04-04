@@ -1,11 +1,10 @@
 import { Link, useSubmit } from "react-router";
 import { useSelector } from "react-redux";
-import { selectUser } from "../users/usersSlice";
+import { selectUserInfo } from "../users/usersSlice";
 import { selectCartList } from "../cart/api/cartSlice";
-import { useEffect } from "react";
 
 const Header = () => {
-  const userInfo = useSelector(selectUser.info);
+  const userInfo = useSelector(selectUserInfo);
   const cartList = useSelector(selectCartList);
   const submit = useSubmit();
 
@@ -15,7 +14,7 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="h-12 content-center bg-gray-800 text-gray-200">
+      <nav className="h-full content-center bg-gray-800 text-gray-200">
         <ul className="flex justify-between gap-8 text-xl">
           <li className="p-2">
             <Link to="/">SKYCART</Link>

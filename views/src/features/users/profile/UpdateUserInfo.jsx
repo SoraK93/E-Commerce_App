@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../usersSlice";
+import { selectUserInfo } from "../usersSlice";
 import { updateUser } from "../usersAPI";
 import { useLocation, useNavigate } from "react-router";
 import { UpdateProfile } from "./UpdateProfile";
@@ -8,7 +8,7 @@ import { ChangePassword } from "./ChangePassword";
 
 const UpdateUserInfo = () => {
   const location = useLocation();
-  const userInfo = useSelector(selectUser.info);
+  const userInfo = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
