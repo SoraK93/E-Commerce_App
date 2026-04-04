@@ -34,13 +34,13 @@ const Login = () => {
   }, [state]);
 
   return (
-    <>
+    <div className="h-full flex">
       {passwordChangeStatus && (
         <div>
           <p>{passwordChangeStatus}</p>
         </div>
       )}
-      <div>
+      <div className="h-full flex flex-col grow justify-center items-center">
         <h1>Login Page</h1>
         <form method="POST" onSubmit={handleSubmit}>
           <FormInput
@@ -61,7 +61,7 @@ const Login = () => {
           <Link to="#">Forgot Password</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

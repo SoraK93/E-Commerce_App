@@ -38,6 +38,7 @@ const FormInput = ({ name, type = "text", value, setFunc = null }) => {
         autoComplete="off"
         value={value}
         onChange={setFunc && ((e) => setFunc(e.target.value))}
+        className="border rounded-md"
       />
     </div>
   );
