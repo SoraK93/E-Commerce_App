@@ -1,19 +1,11 @@
-import { useEffect, type JSX } from "react";
-import { useOutletContext } from "react-router";
-
-import type { BtnContextInterface } from "../pages/OrderPage";
+import { type JSX } from "react";
 
 const PlaceOrder = (): JSX.Element => {
-  const { btnText, setBtnText } = useOutletContext<BtnContextInterface>();
-
-  useEffect(() => {
-    setBtnText("Place your Order")
-  }, [setBtnText])
-
   return (
-    <>
-      <h1>Confirm order details</h1>
-    </>
+    <div>
+      <p>Confirmation message: Order placement successful/ failed.</p>
+      <button type="button">Homepage</button>
+    </div>
   );
 };
 
