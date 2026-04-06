@@ -1,14 +1,14 @@
 import style from "./ToggleButton.module.css";
 
-const ToggleButton = ({ value, setFunc }) => {
+const ToggleButton = ({ value, labelName, setFunc }) => {
   return (
-    <label className={style.switch}>
+    <label>{labelName}
       <input
         type="checkbox"
         checked={value}
         onChange={(e) => setFunc(e.target.checked)}
       />
-      <span className={`${style.slider} ${style.round}`}></span>
+      <span></span>
     </label>
   );
 };

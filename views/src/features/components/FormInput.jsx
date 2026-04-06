@@ -1,26 +1,18 @@
-const FormInput = ({ name, type = "text", value, setFunc = null }) => {
-  let labelName = name;
+const FormInput = ({ name, labelName, type, value, setFunc = null }) => {
   let inputPattern = null;
 
   switch (labelName) {
     case "email":
-      labelName = "Email Address";
       // inputPattern = "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-      type = "email";
       break;
     case "password":
-      labelName = "Password (8 characters minimum)";
       // inputPattern =
       //   "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$";
-      type = "password";
       break;
     case "phone":
-      labelName = "Phone"
       // inputPattern = "^\\+?[1-9][0-9]{7,14}$";
-      type = "tel";
       break;
     default:
-      labelName = name[0].toUpperCase().concat(name.slice(1));
       break;
   }
 
