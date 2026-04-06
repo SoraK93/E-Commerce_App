@@ -46,11 +46,10 @@
     "allowJs": true,
 
     // path
-    "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@features/*": ["src/features/*"],
-      "@utilities/*": ["src/utilities/*"]
+      "@app/*": ["./src/app/*"],
+      "@features/*": ["./src/features/*"],
+      "@utilities/*": ["./src/utilities/*"]
     }
   },
   "include": ["src"]

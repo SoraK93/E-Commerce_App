@@ -111,19 +111,11 @@ export const AppRoutes = createBrowserRouter([
         path: "order",
         lazy: () => import("../features/orders/Order"),
         HydrateFallback: () => fallback("Order"),
-        children: [
-          {
-            index: true,
-            lazy: () =>
-              import("../features/orders/components/ConfirmOrderDetail"),
-            HydrateFallback: () => fallback("Order"),
-          },
-          {
-            path: "place-order",
-            lazy: () => import("../features/orders/components/PlaceOrder"),
-            HydrateFallback: () => fallback("Order"),
-          },
-        ],
+      },
+      {
+        path: "order/place-order",
+        lazy: () => import("../features/orders/components/PlaceOrder"),
+        HydrateFallback: () => fallback("Order"),
       },
     ],
   },
