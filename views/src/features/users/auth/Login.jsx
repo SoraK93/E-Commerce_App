@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
-import { FormInput } from "../../components";
+import { FormInput } from "@features/components/FormInput";
 import { loginAPI } from "./loginRegisterAPI";
-import { handleChange } from "../../../utilities/event-helper";
+import { handleChange } from "@utilities/event-helper";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,12 +45,16 @@ const Login = () => {
         <form method="POST" onSubmit={handleSubmit}>
           <FormInput
             name="email"
+            labelName="Email"
             value={loginData.email}
+            type="email"
             setFunc={(val) => handleChange(setLoginData, "email", val)}
           />
           <FormInput
             name="password"
+            labelName="Password (8 characters min.)"
             value={loginData.password}
+            type="password"
             setFunc={(val) => handleChange(setLoginData, "password", val)}
           />
           <button>Login</button>

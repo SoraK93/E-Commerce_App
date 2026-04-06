@@ -24,21 +24,30 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Register Page</h1>
+    <div className="h-full flex flex-col justify-center items-center">
+      <h1 className="text-4xl ">Register Page</h1>
       <form method="POST" onSubmit={handleSubmit}>
-        {["name", "email", "password", "phone", "address"].map((field) => (
+        {Object.entries({
+          name: "Enter Full Name",
+          email: "Email:",
+          password: "Password",
+          phone: "Phone Number",
+          address: "Permanent Address",
+        }).map(([key, value]) => (
           <FormInput
-            name={field}
-            value={formData[field]}
-            setFunc={(val) => handleChange(setFormData, field, val)}
-            key={`registrationform-${field}`}
+            name={key}
+            labelName={value}
+            value={formData[key]}
+            setFunc={(val) => handleChange(setFormData, key, val)}
+            key={`registrationform-${key}`}
           />
         ))}
         <ToggleButton
           value={formData.is_seller}
+          labelName="Are you a seller?"
           setFunc={(val) => handleChange(setFormData, "isSeller", val)}
         />
+        <br />
         <button>Register</button>
       </form>
       <div>
