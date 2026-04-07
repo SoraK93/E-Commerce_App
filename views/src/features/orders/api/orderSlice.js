@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getOrderList } from "./orderAPI";
+import { createOrder, getOrderList } from "./orderAPI";
 
 const handlePending = (state, _) => {
   state.loading = "pending";
@@ -25,10 +25,20 @@ const order = createSlice({
         state.loading = "fulfilled";
         state.list = action.payload;
       })
+
+      .addCase(createOrder.fulfilled, (state, _) => {
+        state.loading = "fulfilled";
+      })
       // pending case
-      .addMatcher(isAnyOf(getOrderList.pending), handlePending)
+      .addMatcher(
+        isAnyOf(getOrderList.pending, createOrder.pending),
+        handlePending,
+      )
       // rejected case
-      .addMatcher(isAnyOf(getOrderList.rejected), handleReject);
+      .addMatcher(
+        isAnyOf(getOrderList.rejected, createOrder.rejected),
+        handleReject,
+      );
   },
 });
 
