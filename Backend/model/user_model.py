@@ -25,3 +25,4 @@ class UserModel(SQLModel, table=True):
     products: list["ProductsModel"] = Relationship(back_populates="seller")
     sessions: list["SessionModel"] = Relationship(back_populates="user")
     cart: list["CartModel"] = Relationship(back_populates="user")
+    orders: list["OrderModel"] = Relationship(back_populates="user")

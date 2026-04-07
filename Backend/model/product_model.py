@@ -33,3 +33,4 @@ class ProductsModel(SQLModel, table=True):
     # will help in making seller related query without writing any extra query
     seller: Optional["UserModel"] = Relationship(back_populates="products")
     cart: Optional["CartModel"] = Relationship(back_populates="product")
+    orders: Optional["OrderModel"] = Relationship(back_populates="products")
