@@ -16,6 +16,7 @@ from model.product_model import ProductsModel
 from model.user_model import UserModel
 from model.session_model import SessionModel
 from model.cart_model import CartModel
+from model.order_model import OrderModel
 
 load_dotenv()
 
