@@ -1,8 +1,9 @@
 import { selectCartList } from "@features/cart/api/cartSlice";
 import { selectUserInfo } from "@features/users/usersSlice";
 import { type JSX } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { createOrder } from "../api/orderAPI";
 
 export interface BtnContextInterface {
   btnText: string | null;
@@ -20,8 +21,21 @@ const OrderPage = (): JSX.Element => {
   const cartList = useSelector(selectCartList);
   const userInfo = useSelector(selectUserInfo);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onButtonClick = (): void => {
+  const onButtonClick = async (e): Promise<void> => {
+    e.stopPropagation()
+    const cartData = cartList.map(item => (
+      {
+        product_id: item.product.id,
+        quantity: item.quantity,
+        address: userInfo.address,
+        payment_status: false,
+        payment_mode: "Cash" // Options: Cash/Online
+      }
+    ))
+    console.log(cartData)
+    await dispatch(createOrder(cartData))
     navigate("/order/place-order");
   };
 
@@ -54,7 +68,7 @@ const OrderPage = (): JSX.Element => {
           SubTotal ({cartList.length}):{" "}
           {cartList.reduce((total, item) => item.total + total, 0)}
         </p>
-        <button type="button" onClick={onButtonClick}>
+        <button type="button" onClick={(e) => onButtonClick(e)}>
           Place Order
         </button>
       </div>
